@@ -1,0 +1,31 @@
+Source: uhhd
+Maintainer: Phil Howard <phil@pimoroni.com>
+Homepage: https://github.com/pimoroni/unicorn-hat-hd
+Section: python
+Priority: extra
+Build-Depends: debhelper (>= 9.0.0), dh-python, python-all (>= 2.7), python-setuptools, python3-all (>= 3.4), python3-setuptools
+Standards-Version: 3.9.6
+X-Python-Version: >= 2.7
+X-Python3-Version: >= 3.4
+
+Package: python-uhhd
+Architecture: all
+Section: python
+Depends: ${misc:Depends}, ${python:Depends}, python-spidev, python-numpy
+Suggests:
+Description: Python library for the Pimoroni Unicorn HAT HD.
+ Unicorn HAT HD provides a matrix of 256 RGB LED pixels.
+ It's ideal for writing messages, showing graphs, and drawing pictures.
+ .
+ This is the Python 2 version of the package.
+
+Package: python3-uhhd
+Architecture: all
+Section: python
+Depends: ${misc:Depends}, ${python3:Depends}, python3-spidev, python3-numpy
+Suggests:
+Description: Python library for the Pimoroni Unicorn HAT HD.
+ Unicorn HAT HD provides a matrix of 256 RGB LED pixels.
+ It's ideal for writing messages, showing graphs, and drawing pictures.
+ .
+ This is the Python 3 version of the package.
