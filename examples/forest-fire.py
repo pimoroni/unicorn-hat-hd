@@ -3,7 +3,7 @@
 import numpy
 import random
 
-import uhhd
+import unicornhathd
 
 print("""Unicorn HAT HD: Forest Fire
 
@@ -15,7 +15,7 @@ Press Ctrl+C to exit!
 
 scale = 3
 
-width, height = uhhd.get_shape()
+width, height = unicornhathd.get_shape()
 
 forest_width = width * scale
 forest_height = height * scale
@@ -68,9 +68,9 @@ def show_forest(forest):
     for x in range(width):
         for y in range(height):
             r, g, b = avg_forest[x][y]
-            uhhd.set_pixel(x, y, int(r), int(g), int(b))
+            unicornhathd.set_pixel(x, y, int(r), int(g), int(b))
 
-    uhhd.show()
+    unicornhathd.show()
 
 def main():
     forest = initialise()
@@ -83,4 +83,4 @@ try:
     main()
 
 except KeyboardInterrupt:
-    uhhd.off()
+    unicornhathd.off()

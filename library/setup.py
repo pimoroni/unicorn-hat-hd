@@ -38,7 +38,7 @@ classifiers = ['Development Status :: 5 - Production/Stable',
                'Topic :: System :: Hardware']
 
 setup(
-    name            = 'uhhd',
+    name            = 'unicornhathd',
     version         = '0.0.1',
     author          = 'Philip Howard',
     author_email    = 'phil@pimoroni.com',
@@ -48,6 +48,6 @@ setup(
     keywords        = 'Raspberry Pi LED',
     url             = 'http://www.pimoroni.com',
     classifiers     = classifiers,
-    py_modules      = ['uhhd'],
+    py_modules      = ['unicornhathd'],
     install_requires= [ ]
 )

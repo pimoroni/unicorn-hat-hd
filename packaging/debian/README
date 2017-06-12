@@ -3,7 +3,7 @@ README
 Unicorn HAT HD provides a matrix of 256 RGB LED pixels. It's ideal for writing messages, showing graphs, and drawing pictures.
 
 Learn more: https://shop.pimoroni.com/products/unicorn-hat-hd
-For examples run: `curl -sS get.pimoroni.com/uhhd | bash`
+For examples run: `curl -sS get.pimoroni.com/unicornhathd | bash`
 
 IMPORTANT
 

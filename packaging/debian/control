@@ -1,4 +1,4 @@
-Source: uhhd
+Source: unicornhathd
 Maintainer: Phil Howard <phil@pimoroni.com>
 Homepage: https://github.com/pimoroni/unicorn-hat-hd
 Section: python
@@ -8,7 +8,7 @@ Standards-Version: 3.9.6
 X-Python-Version: >= 2.7
 X-Python3-Version: >= 3.4
 
-Package: python-uhhd
+Package: python-unicornhathd
 Architecture: all
 Section: python
 Depends: ${misc:Depends}, ${python:Depends}, python-spidev, python-numpy
@@ -19,7 +19,7 @@ Description: Python library for the Pimoroni Unicorn HAT HD.
  .
  This is the Python 2 version of the package.
 
-Package: python3-uhhd
+Package: python3-unicornhathd
 Architecture: all
 Section: python
 Depends: ${misc:Depends}, ${python3:Depends}, python3-spidev, python3-numpy

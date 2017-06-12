@@ -2,9 +2,9 @@
 
 # script control variables
 
-reponame="unicorn-hat-hd" # leave this blank for auto-detection
-libname="uhhd" # leave this blank for auto-detection
-packagename="uhhd" # leave this blank for auto-selection
+reponame="" # leave this blank for auto-detection
+libname="" # leave this blank for auto-detection
+packagename="" # leave this blank for auto-selection
 
 debianlog="debian/changelog"
 debcontrol="debian/control"

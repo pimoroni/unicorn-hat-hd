@@ -3,7 +3,7 @@ import time
 import math
 import colorsys
 
-import uhhd
+import unicornhathd
 
 print("""Unicorn HAT HD: demo.py
 
@@ -13,7 +13,7 @@ Press Ctrl+C to exit!
 
 """)
 
-u_width,u_height = uhhd.get_shape()
+u_width,u_height = unicornhathd.get_shape()
 
 # Generate a lookup table for 8bit hue to RGB conversion
 hue_to_rgb = []
@@ -145,11 +145,11 @@ while True:
                 r = int(max(0, min(255, r)))
                 g = int(max(0, min(255, g)))
                 b = int(max(0, min(255, b)))
-                uhhd.set_pixel(x, y, r, g, b)
+                unicornhathd.set_pixel(x, y, r, g, b)
 
         step += 2
 
-        uhhd.show()
+        unicornhathd.show()
 
     effect = effects.pop()
     effects.insert(0, effect)

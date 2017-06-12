@@ -16,7 +16,7 @@ Unicorn HAT HD provides a matrix of 256 RGB pixels that is ideal for writing mes
 At A Glance
 -----------
 
-.. automoduleoutline:: uhhd
+.. automoduleoutline:: unicornhathd
    :members:
 
 .. toctree::
