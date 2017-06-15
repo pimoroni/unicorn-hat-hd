@@ -3,7 +3,7 @@
 import random
 import time
 
-import unincornhathd as unicorn
+import unicornhathd as unicorn
 
 
 print("""Unicorn HAT HD: Game Of Life
