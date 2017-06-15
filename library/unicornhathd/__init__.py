@@ -22,7 +22,7 @@ __version__ = '0.0.1'
 
 _spi = spidev.SpiDev()
 _spi.open(0, 0)
-_spi.max_speed_hz = 16000000
+_spi.max_speed_hz = 9000000
 _SOF = 0x72
 _DELAY = 1.0/120
 
