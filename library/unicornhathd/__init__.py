@@ -1,16 +1,22 @@
 #!/usr/bin/env python
-import time
-import colorsys
-import spidev
 
-'''
-['AUTO', 'Color', 'HAT', 'LED_BRIGHTNESS', 'LED_CHANNEL', 'LED_COUNT', 'LED_DMA', 'LED_FREQ_HZ', 'LED_GAMMA', 'LED_INVERT', 'LED_PIN', 'PHAT', 'PHAT_VERTICAL', 'PixelStrip', '__builtins__', '__doc__', '__file__', '__name__', '__package__', '__version__', '_clean_shutdown', '_map', '_pixels', '_rotation', '_wx', '_wy', 'atexit', 'brightness', 'clear', 'colorsys', 'get_brightness', 'get_index_from_xy', 'get_pixel', 'get_pixels', 'get_shape', 'off', 'rotation', 'set_all', 'set_layout', 'set_pixel', 'set_pixel_hsv', 'set_pixels', 'shade_pixels', 'show', 'ws2812', 'x']
-'''
+import colorsys
+import time
+
+try:
+    import spidev
+except ImportError:
+    sys.exit("This library requires the spidev module\nInstall with: sudo pip install spidev")
 
 try:
     import numpy
 except ImportError:
     exit("This library requires the numpy module\nInstall with: sudo pip install numpy")
+
+
+'''
+['AUTO', 'Color', 'HAT', 'LED_BRIGHTNESS', 'LED_CHANNEL', 'LED_COUNT', 'LED_DMA', 'LED_FREQ_HZ', 'LED_GAMMA', 'LED_INVERT', 'LED_PIN', 'PHAT', 'PHAT_VERTICAL', 'PixelStrip', '__builtins__', '__doc__', '__file__', '__name__', '__package__', '__version__', '_clean_shutdown', '_map', '_pixels', '_rotation', '_wx', '_wy', 'atexit', 'brightness', 'clear', 'colorsys', 'get_brightness', 'get_index_from_xy', 'get_pixel', 'get_pixels', 'get_shape', 'off', 'rotation', 'set_all', 'set_layout', 'set_pixel', 'set_pixel_hsv', 'set_pixels', 'shade_pixels', 'show', 'ws2812', 'x']
+'''
 
 __version__ = '0.0.1'
 
