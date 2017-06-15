@@ -1,49 +1,55 @@
 ![Unicorn HAT HD](unicorn-hat-logo.png)
-
-Available from Pimoroni:  
 http://shop.pimoroni.com/products/unicorn-hat-hd 
 
-### `unicornhat hd` Python Library & Examples
+## Installing
 
-Here you'll find everything you need to start lighting up your Unicorn HAT HD using python.
+### Full install (recommended):
 
-Python users should probably ignore most of this repository and just:
+We've created an easy installation script that will install all pre-requisites and get your Unicorn HAT HD
+up and running with minimal efforts. To run it, fire up Terminal which you'll find in Menu -> Accessories -> Terminal
+on your Raspberry Pi desktop, as illustrated below:
 
-**Full install ( recommended ):**
+![Finding the terminal](http://get.pimoroni.com/resources/github-repo-terminal.png)
+
+In the new terminal window type the command exactly as it appears below (check for typos) and follow the on-screen instructions:
 
 ```bash
-\curl -sS https://get.pimoroni.com/unicornhathd | bash
+curl https://get.pimoroni.com/unicornhathd | bash
 ```
 
-**Install for Python 3:**
+If you choose to download examples you'll find them in `/home/pi/Pimoroni/unicornhathd/`.
+
+### Manual install:
+
+#### Library install for Python 3:
 
 ```bash
 sudo apt-get install python3-pip python3-dev
 sudo pip3 install unicornhathd
 ```
 
-**Install for Python 2:**
+#### Library install for Python 2:
 
 ```bash
 sudo apt-get install python-pip python-dev
 sudo pip install unicornhathd
 ```
 
-**Install from Github clone**
+### Development:
 
-```
-git clone https://github.com/pimoroni/unicorn-hat-hd
-cd unicorn-hat-hd/
+If you want to contribute, or like living on the edge of your seat by having the latest code, you should clone this repository, `cd` to the library directory, and run:
+
+```bash
 sudo apt-get install python-dev python-setuptools
-cd library/
-sudo python setup.py install
-cd ../..
+sudo python3 setup.py install
 ```
+(or `sudo python setup.py install` whichever your primary Python environment may be)
 
-Then proceed to [examples](examples).
+In all cases you will have to enable the i2c bus.
 
-### Documentation & Support
+## Documentation & Support
 
+* Guides and tutorials - https://learn.pimoroni.com/scroll-phat-hd
 * Function reference - http://docs.pimoroni.com/unicornhathd/
 * GPIO Pinout - http://pinout.xyz/pinout/unicorn_hat_hd
 * Get help - http://forums.pimoroni.com/c/support
