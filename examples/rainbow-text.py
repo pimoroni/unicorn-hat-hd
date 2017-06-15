@@ -1,19 +1,5 @@
 #!/usr/bin/env python
 
-'''Unicorn HAT HD: Show a PNG image!
-
-This basic example shows use of the Python Pillow library:
-
-sudo pip-3.2 install pillow # or sudo pip install pillow
-
-The tiny 16x16 bosses in lofi.png are from Oddball: http://forums.tigsource.com/index.php?topic=8834.0
-
-Licensed under Creative Commons Attribution-Noncommercial-Share Alike 3.0 Unported License.
-
-Press Ctrl+C to exit!
-
-'''
-
 import signal
 import time
 import colorsys
@@ -26,38 +12,47 @@ except ImportError:
 
 import unicornhathd as unicorn
 
-print("""Unicorn HAT HD: Rainbow Text
+print("""Unicorn HAT HD: Text
 
-This example shows the use of regular text rendered in white on a black background,
-to control the blending of a rainbow effect.
+This example shows how to draw, display and scroll text in a regular TrueType font on Unicorn HAT HD.
+
+It uses the Python Pillow/PIL image library, and all other drawing functions are available.
+
+See: http://pillow.readthedocs.io/en/3.1.x/reference/
 
 """)
 
+TEXT = "Hello World! How are you today? This is a real font!"
+
 FONT = ("/usr/share/fonts/truetype/droid/DroidSans.ttf", 12)
-FONT = ("/usr/share/fonts/truetype/roboto/Roboto-Regular.ttf", 10)
+#FONT = ("/usr/share/fonts/truetype/roboto/Roboto-Regular.ttf", 10)
 
 unicorn.rotation(0)
 unicorn.brightness(0.5)
 
+text_x = 1
+text_y = 2
+
 width, height = unicorn.get_shape()
 
-text_width = 250
 
 font_file, font_size = FONT
 
-image = Image.new("RGB", (text_width,16), (0,0,0))
-draw = ImageDraw.Draw(image)
 font = ImageFont.truetype(font_file, font_size)
 
-draw.text((1, 2), "Hello World! How are you today? This is a real font!", fill=(255, 255, 255), font=font)
+text_width, text_height = font.getsize(TEXT)
+
+text_width += width + text_x
+
+image = Image.new("RGB", (text_width,max(16, text_height)), (0,0,0))
+draw = ImageDraw.Draw(image)
+
+draw.text((text_x, text_y), TEXT, fill=(255, 255, 255), font=font)
 
 for scroll in range(text_width - width):
-    c = 0
-
     for x in range(width):
         for y in range(height):
             pixel = image.getpixel((x+scroll, y))
-            #print(pixel)
 
             br, bg, bb = [int(n * 255) for n in colorsys.hsv_to_rgb((x + scroll) / float(text_width), 1.0, 1.0)]
             r, g, b = [float(n / 255.0) for n in pixel]
@@ -66,12 +61,7 @@ for scroll in range(text_width - width):
             b = int(bb * b)
 
             unicorn.set_pixel(width-1-x, y, r, g, b)
-            c += (r + g + b)
 
     unicorn.show()
     time.sleep(0.01)
-
-    if c == 0:
-        print("Text ended at: {}".format(scroll))
-        break
 
