@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-Copyright (c) 2016 Pimoroni
+Copyright (c) 2017 Pimoroni
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -49,5 +49,5 @@ setup(
     url             = 'http://www.pimoroni.com',
     classifiers     = classifiers,
     py_modules      = ['unicornhathd'],
-    install_requires= [ ]
+    install_requires= ['spidev']
 )
