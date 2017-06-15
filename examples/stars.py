@@ -17,7 +17,7 @@ Press Ctrl+C to exit!
 """)
 
 star_count = 25
-star_speed = 0.10
+star_speed = 0.05
 stars = []
 
 for i in range(0, star_count):
