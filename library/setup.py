@@ -48,6 +48,7 @@ setup(
     keywords        = 'Raspberry Pi LED',
     url             = 'http://www.pimoroni.com',
     classifiers     = classifiers,
-    py_modules      = ['unicornhathd'],
+    py_modules      = [],
+    packages        = ['unicornhathd'],
     install_requires= ['spidev']
 )
