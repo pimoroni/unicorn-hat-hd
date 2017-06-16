@@ -16,6 +16,8 @@ Press Ctrl+C to exit!
 
 """)
 
+unicornhathd.rotation(0)
+
 step = 0
 try:
     while True:

@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 
-import numpy
 import random
 
+import numpy
+
 import unicornhathd
+
 
 print("""Unicorn HAT HD: Forest Fire
 
@@ -15,6 +17,7 @@ Press Ctrl+C to exit!
 
 scale = 3
 
+unicornhathd.rotation(0)
 width, height = unicornhathd.get_shape()
 
 forest_width = width * scale

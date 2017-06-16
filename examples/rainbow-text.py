@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
+import colorsys
 import signal
 import time
-import colorsys
 from sys import exit
 
 try:
@@ -10,7 +10,7 @@ try:
 except ImportError:
     exit("This script requires the pillow module\nInstall with: sudo pip install pillow")
 
-import unicornhathd as unicorn
+import unicornhathd
 
 print("""Unicorn HAT HD: Text
 
@@ -30,13 +30,13 @@ TEXT = "Hello World! How are you today? This is a real font!"
 # sudo apt install fonts-roboto
 FONT = ("/usr/share/fonts/truetype/roboto/Roboto-Bold.ttf", 10)
 
-unicorn.rotation(0)
-unicorn.brightness(0.5)
+unicornhathd.rotation(0)
+unicornhathd.brightness(0.5)
 
 text_x = 1
 text_y = 2
 
-width, height = unicorn.get_shape()
+width, height = unicornhathd.get_shape()
 
 
 font_file, font_size = FONT
@@ -63,8 +63,9 @@ for scroll in range(text_width - width):
             g = int(bg * g)
             b = int(bb * b)
 
-            unicorn.set_pixel(width-1-x, y, r, g, b)
+            unicornhathd.set_pixel(width-1-x, y, r, g, b)
 
-    unicorn.show()
+    unicornhathd.show()
     time.sleep(0.01)
 
+unicornhathd.off()

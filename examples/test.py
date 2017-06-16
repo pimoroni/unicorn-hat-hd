@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import time
 
 import unicornhathd
@@ -18,4 +20,4 @@ try:
 
 except KeyboardInterrupt:
     print("FPS: {}".format(frame / (time.time() - t_start)))
-    unicornhathd.clear()
+    unicornhathd.off()

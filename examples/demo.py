@@ -1,9 +1,11 @@
 #!/usr/bin/env python
-import time
-import math
+
 import colorsys
+import math
+import time
 
 import unicornhathd
+
 
 print("""Unicorn HAT HD: demo.py
 
@@ -13,6 +15,7 @@ Press Ctrl+C to exit!
 
 """)
 
+unicornhathd.rotation(0)
 u_width,u_height = unicornhathd.get_shape()
 
 # Generate a lookup table for 8bit hue to RGB conversion
@@ -130,26 +133,30 @@ current_milli_time = lambda: int(round(time.time() * 1000))
 
 step = 0
 
-while True:
-    for i in range(100):
-        start = current_milli_time()
-        for y in range(u_height):
-            for x in range(u_width):
-                r, g, b = effects[0](x, y, step)
-                if i > 75:
-                    r2, g2, b2 = effects[-1](x, y, step)
-                    ratio = (100.00 - i) / 25.0
-                    r = r * ratio + r2 * (1.0 - ratio)
-                    g = g * ratio + g2 * (1.0 - ratio)
-                    b = b * ratio + b2 * (1.0 - ratio)
-                r = int(max(0, min(255, r)))
-                g = int(max(0, min(255, g)))
-                b = int(max(0, min(255, b)))
-                unicornhathd.set_pixel(x, y, r, g, b)
+try:
+    while True:
+        for i in range(100):
+            start = current_milli_time()
+            for y in range(u_height):
+                for x in range(u_width):
+                    r, g, b = effects[0](x, y, step)
+                    if i > 75:
+                        r2, g2, b2 = effects[-1](x, y, step)
+                        ratio = (100.00 - i) / 25.0
+                        r = r * ratio + r2 * (1.0 - ratio)
+                        g = g * ratio + g2 * (1.0 - ratio)
+                        b = b * ratio + b2 * (1.0 - ratio)
+                    r = int(max(0, min(255, r)))
+                    g = int(max(0, min(255, g)))
+                    b = int(max(0, min(255, b)))
+                    unicornhathd.set_pixel(x, y, r, g, b)
 
-        step += 2
+            step += 2
 
-        unicornhathd.show()
+            unicornhathd.show()
 
-    effect = effects.pop()
-    effects.insert(0, effect)
+        effect = effects.pop()
+        effects.insert(0, effect)
+
+except KeyboardInterrupt:
+    unicornhathd.off()

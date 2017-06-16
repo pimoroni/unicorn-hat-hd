@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
+import colorsys
 import signal
 import time
-import colorsys
 from sys import exit
 
 try:
@@ -10,15 +10,16 @@ try:
 except ImportError:
     exit("This script requires the pillow module\nInstall with: sudo pip install pillow")
 
-import unicornhathd as unicorn
+import unicornhathd
+
 
 print("""Unicorn HAT HD: Text
 
-This example shows how to draw, display and scroll text in a regular TrueType font on Unicorn HAT HD.
+This example shows how to draw, display and scroll text in a regular
+TrueType font on Unicorn HAT HD.
 
-It uses the Python Pillow/PIL image library, and all other drawing functions are available.
-
-See: http://pillow.readthedocs.io/en/3.1.x/reference/
+It uses the Python Pillow/PIL image library, and all other drawing functions
+are available. See: http://pillow.readthedocs.io/en/3.1.x/reference/
 
 """)
 
@@ -38,11 +39,11 @@ colours = [tuple([int(n * 255) for n in colorsys.hsv_to_rgb(x/float(len(lines)),
 # sudo apt install fonts-roboto
 FONT = ("/usr/share/fonts/truetype/roboto/Roboto-Bold.ttf", 10)
 
-unicorn.rotation(0)
-unicorn.brightness(1.0)
+unicornhathd.rotation(0)
+unicornhathd.brightness(1.0)
 
 
-width, height = unicorn.get_shape()
+width, height = unicornhathd.get_shape()
 
 text_x = width
 text_y = 2
@@ -76,8 +77,9 @@ for scroll in range(text_width - width):
         for y in range(height):
             pixel = image.getpixel((x+scroll, y))
             r, g, b = [int(n) for n in pixel]
-            unicorn.set_pixel(width-1-x, y, r, g, b)
+            unicornhathd.set_pixel(width-1-x, y, r, g, b)
 
-    unicorn.show()
+    unicornhathd.show()
     time.sleep(0.01)
 
+unicornhathd.off()

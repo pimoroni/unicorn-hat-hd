@@ -2,8 +2,8 @@
 
 import colorsys
 import math
-import time
 import random
+import time
 
 import unicornhathd
 

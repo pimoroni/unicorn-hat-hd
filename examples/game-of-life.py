@@ -3,16 +3,13 @@
 import random
 import time
 
-import unicornhathd as unicorn
+import unicornhathd
 
 
 print("""Unicorn HAT HD: Game Of Life
 
 Runs Conway's Game Of Life on your Unicorn HAT, this starts 
 with a random spread of life, so results may vary!
-
-If you're using a Unicorn HAT and only half the screen lights up, 
-edit this example and  change 'unicorn.AUTO' to 'unicorn.HAT' below.
 """)
 
 try:
@@ -20,9 +17,9 @@ try:
 except NameError:
     xrange = range
 
-unicorn.rotation(90)
-unicorn.brightness(0.5)
-width,height=unicorn.get_shape()
+unicornhathd.rotation(0)
+unicornhathd.brightness(0.5)
+width,height=unicornhathd.get_shape()
 
 size = width*height
 
@@ -75,8 +72,8 @@ class GameOfLife:
         for i in xrange(width):
             for j in xrange(height):
                rgb = self.color[self.value(i, j)]
-               unicorn.set_pixel(i, j, rgb[0], rgb[1], rgb[2])
-        unicorn.show()
+               unicornhathd.set_pixel(i, j, rgb[0], rgb[1], rgb[2])
+        unicornhathd.show()
 
 life = GameOfLife()
 
@@ -87,4 +84,4 @@ try:
         time.sleep(0.05)
 
 except KeyboardInterrupt:
-    unicorn.off()
+    unicornhathd.off()

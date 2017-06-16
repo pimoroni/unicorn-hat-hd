@@ -1,9 +1,13 @@
 #!/usr/bin/env python
-import unicornhathd
-import pygame
-import time
+
 import os
 import random
+import time
+
+import pygame
+
+import unicornhathd
+
 
 class Snake:
     def __init__(self, canvas, x=5, y=5):
@@ -202,4 +206,3 @@ if __name__ == "__main__":
 
     except KeyboardInterrupt:
         pass
-

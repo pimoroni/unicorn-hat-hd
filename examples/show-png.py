@@ -1,19 +1,5 @@
 #!/usr/bin/env python
 
-'''Unicorn HAT HD: Show a PNG image!
-
-This basic example shows use of the Python Pillow library:
-
-sudo pip-3.2 install pillow # or sudo pip install pillow
-
-The tiny 16x16 bosses in lofi.png are from Oddball: http://forums.tigsource.com/index.php?topic=8834.0
-
-Licensed under Creative Commons Attribution-Noncommercial-Share Alike 3.0 Unported License.
-
-Press Ctrl+C to exit!
-
-'''
-
 import signal
 import time
 from sys import exit
@@ -23,13 +9,27 @@ try:
 except ImportError:
     exit("This script requires the pillow module\nInstall with: sudo pip install pillow")
 
-import unicornhathd as unicorn
+import unicornhathd
 
 
-unicorn.rotation(90)
-unicorn.brightness(0.5)
+print("""Unicorn HAT HD: Show a PNG image!
 
-width, height = unicorn.get_shape()
+This basic example shows use of the Python Pillow library:
+
+The tiny 16x16 bosses in lofi.png are from Oddball:
+http://forums.tigsource.com/index.php?topic=8834.0
+
+Licensed under Creative Commons Attribution-Noncommercial-Share Alike 3.0
+Unported License.
+
+Press Ctrl+C to exit!
+
+""")
+
+unicornhathd.rotation(90)
+unicornhathd.brightness(0.5)
+
+width, height = unicornhathd.get_shape()
 
 img = Image.open('lofi.png')
 
@@ -45,10 +45,11 @@ try:
                         r, g, b = int(pixel[0]),int(pixel[1]),int(pixel[2])
                         if r or g or b:
                             valid = True
-                        unicorn.set_pixel(x, y, r, g, b)
+                        unicornhathd.set_pixel(x, y, r, g, b)
                 if valid:
-                    unicorn.show()
+                    unicornhathd.show()
                     time.sleep(0.5)
 
 except KeyboardInterrupt:
-    pass
+    unicornhathd.off()
+
