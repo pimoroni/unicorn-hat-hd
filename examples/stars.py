@@ -33,7 +33,7 @@ try:
             stars[i][1] + ((stars[i][1] - 8.1) * star_speed),
             stars[i][2] + star_speed * 50)
 
-        if stars[i][0] < 0 or stars[i][1] < 0 or stars[i][0] >= 15 or stars[i][1] >= 15:
+        if stars[i][0] < 0 or stars[i][1] < 0 or stars[i][0] > 16 or stars[i][1] > 16:
           stars[i] = (random.uniform(4, 11), random.uniform(4, 11), 0)
            
         v = stars[i][2]
