@@ -2,6 +2,7 @@
 
 import signal
 import time
+import colorsys
 from sys import exit
 
 try:
@@ -21,38 +22,59 @@ See: http://pillow.readthedocs.io/en/3.1.x/reference/
 
 """)
 
-TEXT = "Hello World! How are you today? This is a real font!"
 
-FONT = ("/usr/share/fonts/truetype/droid/DroidSans.ttf", 12)
-#FONT = ("/usr/share/fonts/truetype/roboto/Roboto-Regular.ttf", 10)
+lines = ["In the old #BILGETANK we'll keep you in the know",
+         "In the old #BILGETANK we'll fix your techie woes",
+         "And we'll make things",
+         "And we'll break things",
+         "'til we're altogether aching",
+         "Then we'll grab a cup of grog down in the old #BILGETANK"]
+
+colours = [tuple([int(n * 255) for n in colorsys.hsv_to_rgb(x/float(len(lines)), 1.0, 1.0)]) for x in range(len(lines))]
+
+# sudo apt install fonts-droid
+#FONT = ("/usr/share/fonts/truetype/droid/DroidSans.ttf", 12)
+
+# sudo apt install fonts-roboto
+FONT = ("/usr/share/fonts/truetype/roboto/Roboto-Bold.ttf", 10)
 
 unicorn.rotation(0)
-unicorn.brightness(0.5)
+unicorn.brightness(1.0)
 
-text_x = 1
-text_y = 2
 
 width, height = unicorn.get_shape()
+
+text_x = width
+text_y = 2
 
 
 font_file, font_size = FONT
 
 font = ImageFont.truetype(font_file, font_size)
 
-text_width, text_height = font.getsize(TEXT)
+text_width, text_height = width, 0
 
-text_width += width + text_x
+for line in lines:
+    w, h = font.getsize(line)
+    text_width += w + width
+    text_height = max(text_height,h)
+
+text_width += width + text_x + 1
 
 image = Image.new("RGB", (text_width,max(16, text_height)), (0,0,0))
 draw = ImageDraw.Draw(image)
 
-draw.text((text_x, text_y), TEXT, fill=(255, 255, 255), font=font)
+offset_left = 0
+
+for index, line in enumerate(lines):
+    draw.text((text_x + offset_left, text_y), line, colours[index], font=font)
+
+    offset_left += font.getsize(line)[0] + width
 
 for scroll in range(text_width - width):
     for x in range(width):
         for y in range(height):
             pixel = image.getpixel((x+scroll, y))
-            #print(pixel)
             r, g, b = [int(n) for n in pixel]
             unicorn.set_pixel(width-1-x, y, r, g, b)
 

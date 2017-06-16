@@ -24,8 +24,11 @@ See: http://pillow.readthedocs.io/en/3.1.x/reference/
 
 TEXT = "Hello World! How are you today? This is a real font!"
 
-FONT = ("/usr/share/fonts/truetype/droid/DroidSans.ttf", 12)
-#FONT = ("/usr/share/fonts/truetype/roboto/Roboto-Regular.ttf", 10)
+# sudo apt install fonts-droid
+#FONT = ("/usr/share/fonts/truetype/droid/DroidSans.ttf", 12)
+
+# sudo apt install fonts-roboto
+FONT = ("/usr/share/fonts/truetype/roboto/Roboto-Bold.ttf", 10)
 
 unicorn.rotation(0)
 unicorn.brightness(0.5)
