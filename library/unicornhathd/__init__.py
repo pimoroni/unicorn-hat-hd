@@ -124,6 +124,6 @@ def off():
 
 def show():
     """Output the contents of the buffer to Unicorn HAT HD."""
-    _spi.xfer2([_SOF] + (numpy.rot90(_buf,_rotation).reshape(768) * _brightness).astype(int).tolist())
+    _spi.xfer2([_SOF] + (numpy.rot90(_buf,_rotation).reshape(768) * _brightness).astype(numpy.uint8).tolist())
     time.sleep(_DELAY)
 
