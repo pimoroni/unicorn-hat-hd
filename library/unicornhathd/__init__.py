@@ -14,7 +14,7 @@ except ImportError:
     exit("This library requires the numpy module\nInstall with: sudo pip install numpy")
 
 
-__version__ = '0.0.1'
+__version__ = '0.0.2'
 
 _spi = spidev.SpiDev()
 _spi.open(0, 0)
