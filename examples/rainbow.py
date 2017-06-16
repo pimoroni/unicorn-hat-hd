@@ -20,8 +20,8 @@ step = 0
 try:
     while True:
       step += 1
-      for x in range(0, 15):
-        for y in range(0, 15):
+      for x in range(0, 16):
+        for y in range(0, 16):
           dx = 7
           dy = 7
 
