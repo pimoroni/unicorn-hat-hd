@@ -14,10 +14,6 @@ except ImportError:
     exit("This library requires the numpy module\nInstall with: sudo pip install numpy")
 
 
-'''
-['AUTO', 'Color', 'HAT', 'LED_BRIGHTNESS', 'LED_CHANNEL', 'LED_COUNT', 'LED_DMA', 'LED_FREQ_HZ', 'LED_GAMMA', 'LED_INVERT', 'LED_PIN', 'PHAT', 'PHAT_VERTICAL', 'PixelStrip', '__builtins__', '__doc__', '__file__', '__name__', '__package__', '__version__', '_clean_shutdown', '_map', '_pixels', '_rotation', '_wx', '_wy', 'atexit', 'brightness', 'clear', 'colorsys', 'get_brightness', 'get_index_from_xy', 'get_pixel', 'get_pixels', 'get_shape', 'off', 'rotation', 'set_all', 'set_layout', 'set_pixel', 'set_pixel_hsv', 'set_pixels', 'shade_pixels', 'show', 'ws2812', 'x']
-'''
-
 __version__ = '0.0.1'
 
 _spi = spidev.SpiDev()
@@ -35,10 +31,10 @@ PHAT_VERTICAL = None
 AUTO = None
 
 _rotation = 90
-_brightness = 0.2
+_brightness = 0.5
 _buf = numpy.zeros((16,16,3), dtype=int)
 
-def brightness(b=0.2):
+def brightness(b):
     """Set the display brightness between 0.0 and 1.0.
 
     :param b: Brightness from 0.0 to 1.0 (default 0.2)
@@ -128,6 +124,6 @@ def off():
 
 def show():
     """Output the contents of the buffer to Unicorn HAT HD."""
-    _spi.xfer2([_SOF] + numpy.rot90(_buf,_rotation).reshape(768).tolist())
+    _spi.xfer2([_SOF] + (numpy.rot90(_buf,_rotation).reshape(768) * _brightness).astype(int).tolist())
     time.sleep(_DELAY)
 
