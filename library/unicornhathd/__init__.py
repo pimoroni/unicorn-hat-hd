@@ -30,7 +30,7 @@ HAT = None
 PHAT_VERTICAL = None
 AUTO = None
 
-_rotation = 90
+_rotation = 0
 _brightness = 0.5
 _buf = numpy.zeros((16,16,3), dtype=int)
 

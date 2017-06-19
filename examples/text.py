@@ -33,11 +33,17 @@ lines = ["In the old #BILGETANK we'll keep you in the know",
 
 colours = [tuple([int(n * 255) for n in colorsys.hsv_to_rgb(x/float(len(lines)), 1.0, 1.0)]) for x in range(len(lines))]
 
+
+# Use `fc-list` to show a list of installed fonts on your system,
+# or `ls /usr/share/fonts/` and explore.
+
+FONT = ("/usr/share/fonts/truetype/freefont/FreeSansBold.ttf", 12)
+
 # sudo apt install fonts-droid
 #FONT = ("/usr/share/fonts/truetype/droid/DroidSans.ttf", 12)
 
 # sudo apt install fonts-roboto
-FONT = ("/usr/share/fonts/truetype/roboto/Roboto-Bold.ttf", 10)
+#FONT = ("/usr/share/fonts/truetype/roboto/Roboto-Bold.ttf", 10)
 
 unicornhathd.rotation(0)
 unicornhathd.brightness(1.0)

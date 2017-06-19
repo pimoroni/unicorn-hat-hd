@@ -21,7 +21,7 @@ from signal import pause
 class DisplayOutput():
     def __init__(self):
         self.hat = unicornhathd
-        self.hat.rotation(180)
+        self.hat.rotation(90)
 
     def write(self, buf):
         img = Image.frombytes('RGB', (64, 64), buf)

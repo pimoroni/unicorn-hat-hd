@@ -8,6 +8,16 @@ import curses
 
 import unicornhathd
 
+CONTROLS = {
+    ord('w'): 'up',
+    ord('s'): 'down',
+    ord('a'): 'left',
+    ord('d'): 'right',
+    curses.KEY_UP: 'up',
+    curses.KEY_DOWN: 'down',
+    curses.KEY_LEFT: 'left',
+    curses.KEY_RIGHT: 'right'
+}
 
 class Snake:
     def __init__(self, canvas, x=5, y=5):
@@ -138,6 +148,9 @@ class Apple:
 
 def main(stdscr):
     stdscr.nodelay(1)
+    stdscr.addstr(2, 5, "Unicorn HAT HD: Snake")
+    stdscr.addstr(4, 5, "w = UP, s = DOWN, a = LEFT, d = RIGHT")
+    stdscr.addstr(6, 5, "Press Ctrl+C to exit!")
 
     width, height = unicornhathd.get_shape()
 
@@ -147,7 +160,7 @@ def main(stdscr):
 
     num_apples = 16
 
-    snake = Snake(unicornhathd, 5, 5)
+    snake = Snake(unicornhathd, 13, 5)
 
     apples = [Apple(unicornhathd) for x in range(num_apples)]
 
@@ -185,10 +198,8 @@ def main(stdscr):
 
                 while key != -1:
                     key = stdscr.getch()
-                    if key == 259: dir = 'up'
-                    if key == 258: dir = 'down'
-                    if key == 260: dir = 'left'
-                    if key == 261: dir = 'right'
+                    if key in CONTROLS:
+                        dir = CONTROLS[key]
 
                 hit = not snake.update(apples, dir)
 
