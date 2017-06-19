@@ -4,7 +4,7 @@ import os
 import random
 import time
 
-import pygame
+import curses
 
 import unicornhathd
 
@@ -56,22 +56,19 @@ class Snake:
     def num_eaten(self):
         return len(self.eaten)
 
-    def update(self, apples):
-        keys = pygame.key.get_pressed()
-        pygame.event.pump()
-
+    def update(self, apples, direction=''):
         x, y = self.position
 
-        if keys[pygame.K_LEFT] and self.velocity != (1, 0):
+        if direction == 'left' and self.velocity != (1, 0):
             self.velocity = (-1, 0)
             
-        if keys[pygame.K_RIGHT] and self.velocity != (-1, 0):
+        if direction == 'right' and self.velocity != (-1, 0):
             self.velocity = (1, 0)
 
-        if keys[pygame.K_UP] and self.velocity != (0, -1):
+        if direction == 'up' and self.velocity != (0, -1):
             self.velocity = (0, 1)
 
-        if keys[pygame.K_DOWN] and self.velocity != (0, 1):
+        if direction == 'down' and self.velocity != (0, 1):
             self.velocity = (0, -1)
 
         v_x, v_y = self.velocity
@@ -139,12 +136,8 @@ class Apple:
         self.canvas.set_pixel(x, y, r, g, b)
 
 
-if __name__ == "__main__":
-    os.putenv("DISPLAY", ":0.0")
-    pygame.init()
-    screen = pygame.display.set_mode((160,160))
-
-    #unicornhathd.rotation(-90)
+def main(stdscr):
+    stdscr.nodelay(1)
 
     width, height = unicornhathd.get_shape()
 
@@ -187,7 +180,17 @@ if __name__ == "__main__":
                     apple.update()
                     apple.draw()
 
-                hit = not snake.update(apples)
+                dir = ''
+                key = 0
+
+                while key != -1:
+                    key = stdscr.getch()
+                    if key == 259: dir = 'up'
+                    if key == 258: dir = 'down'
+                    if key == 260: dir = 'left'
+                    if key == 261: dir = 'right'
+
+                hit = not snake.update(apples, dir)
 
                 if snake.num_eaten() == num_apples:
                     snake.poo()
@@ -206,3 +209,7 @@ if __name__ == "__main__":
 
     except KeyboardInterrupt:
         pass
+
+if __name__ == "__main__":
+    curses.wrapper(main)
+
