@@ -1,4 +1,4 @@
-![Unicorn HAT HD](unicorn-hat-logo.png)
+![Unicorn HAT HD](unicorn-hat-hd-logo.png)
 http://shop.pimoroni.com/products/unicorn-hat-hd 
 
 ## Installing
