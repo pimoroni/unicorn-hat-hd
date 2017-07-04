@@ -37,7 +37,7 @@ _buf = numpy.zeros((16,16,3), dtype=int)
 def brightness(b):
     """Set the display brightness between 0.0 and 1.0.
 
-    :param b: Brightness from 0.0 to 1.0 (default 0.2)
+    :param b: Brightness from 0.0 to 1.0 (default 0.5)
 
     """
 
@@ -69,8 +69,8 @@ def set_all(r, g, b):
 def set_pixel(x, y, r, g, b):
     """Set a single pixel to RGB colour.
 
-    :param x: Horizontal position from 0 to 7
-    :param y: Veritcal position from 0 to 7
+    :param x: Horizontal position from 0 to 15
+    :param y: Veritcal position from 0 to 15
     :param r: Amount of red from 0 to 255
     :param g: Amount of green from 0 to 255
     :param b: Amount of blue from 0 to 255
@@ -81,8 +81,8 @@ def set_pixel(x, y, r, g, b):
 def set_pixel_hsv(x, y, h, s=1.0, v=1.0):
     """set a single pixel to a colour using HSV.
 
-     :param x: Horizontal position from 0 to 7
-     :param y: Veritcal position from 0 to 7
+     :param x: Horizontal position from 0 to 15
+     :param y: Veritcal position from 0 to 15
      :param h: Hue from 0.0 to 1.0 ( IE: degrees around hue wheel/360.0 )
      :param s: Saturation from 0.0 to 1.0
      :param v: Value (also known as brightness) from 0.0 to 1.0
