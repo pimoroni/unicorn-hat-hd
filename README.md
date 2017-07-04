@@ -17,7 +17,7 @@ In the new terminal window type the command exactly as it appears below (check f
 curl https://get.pimoroni.com/unicornhathd | bash
 ```
 
-If you choose to download examples you'll find them in `/home/pi/Pimoroni/unicornhathd/`.
+If you choose to download examples you'll find them in `/home/pi/Pimoroni/unicornhathd/`. To prototype and try out your code without having to deploy it onto a Raspberry Pi every time, you can use the [Unicorn HAT simulator](https://github.com/jayniz/unicorn-hat-sim) to run a mock Unicorn Hat on your computer.
 
 ### Manual install:
 
