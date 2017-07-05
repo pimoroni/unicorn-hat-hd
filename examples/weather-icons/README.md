@@ -65,7 +65,3 @@ For more animations and icons (also in 8x8 for good old unicorn-hat) please visi
 
 [unicornhat_waether_icons by LoveBootCaptain](https://github.com/LoveBootCaptain/unicornhat_weather_icons "Contribute") 
 
-
-
-
-
