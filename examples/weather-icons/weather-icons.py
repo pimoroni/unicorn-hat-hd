@@ -86,7 +86,7 @@ def help():
     
     try one of the files from this list: 
     {}
-    ''').format(os.listdir(folder_path))
+    ''').format(", ".join(os.listdir(folder_path)))
 
 
 def draw_animation(image):
