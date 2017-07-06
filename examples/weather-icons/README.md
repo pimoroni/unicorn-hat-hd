@@ -1,18 +1,18 @@
-# animated weather icons for the unicornhat hd
-handmade weather animations for unicornhat hd made by pimoroni. each hd animation is made of 32 handmade mini pictures, combined to a sprite.
+# animated weather icons for the unicorn-hat-hd
+handmade weather animations for unicorn-hat-hd made by pimoroni. each hd animation is made of 32 handmade mini pictures, combined to a sprite.
 
 
-draw_animation(image) is same as in the 'show-png' example but put into a tiny little function
-put in you image object and you're done
+draw_animation(image) is same as in the 'show-png' example but put into a tiny little function.
+
+put in your image object and you're done.
+
 [pimoroni's show-png example](https://github.com/pimoroni/unicorn-hat-hd/blob/master/examples/show-png.py "pimoroni's show-png example")
 
-the draw_animation() function will loop through all images in the sprite and it will look like a tiny animation
+the draw_animation() function will loop through all images in the sprite and it will look like a tiny animation. Awesome !!
 
-you can change the 'fps' with changing the 'cycle_time' variable (0.25 is very smooth)
+you can change the 'fps' with changing the 'cycle_time' variable (0.25 is very smooth).
 
-loop() finally loops through all png images in a folder (you might guessed it) so you can see all possibilities
-
-I will add an own test-loop for all icons later.
+loop() finally loops through all png images in a folder (you might guessed it) so you can see all possibilities.
 
 Usage:
 
@@ -29,7 +29,7 @@ example:
 ```weather-icons.py clear-day.png```
 
 
-## new unicornhat hd animations 16x16
+## new unicorn-hat-hd animations 16x16
 
 |                             | unicornhat hd                           |                                             |
 |:---------------------------:|:---------------------------------------:|:-------------------------------------------:|
@@ -64,8 +64,4 @@ example:
 For more animations and icons (also in 8x8 for good old unicorn-hat) please visit and support the original project by LoveBootCaptain:
 
 [unicornhat_waether_icons by LoveBootCaptain](https://github.com/LoveBootCaptain/unicornhat_weather_icons "Contribute") 
-
-
-
-
 
