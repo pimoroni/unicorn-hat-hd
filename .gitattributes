@@ -1,2 +1,3 @@
 projects/unicornpaint/static/* linguist-vendored
+projects/unicornpaint/templates/* linguist-vendored
 sphinx/* linguist-documentation
