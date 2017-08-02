@@ -7,6 +7,6 @@ For examples run: `curl -sS get.pimoroni.com/unicornhathd | bash`
 
 IMPORTANT
 
-Unicorn HAT HD requires spi.
+Unicorn HAT HD requires SPI.
 To enable run `curl get.pimoroni.com/spi | bash`
 or use raspi-config and reboot your Raspberry Pi.

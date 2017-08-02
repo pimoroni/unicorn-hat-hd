@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 
+import curses
 import os
 import random
 import time
 
-import curses
-
 import unicornhathd
+
 
 CONTROLS = {
     ord('w'): 'up',
@@ -43,7 +43,7 @@ class Snake:
     def shrink(self):
         if self.length > 1:
             self.length -= 1
-            self.tail = self.tail[-self.length:] 
+            self.tail = self.tail[-self.length:]
         if len(self.eaten) > 0:
             self.eaten.pop(0)
 
@@ -71,7 +71,7 @@ class Snake:
 
         if direction == 'left' and self.velocity != (1, 0):
             self.velocity = (-1, 0)
-            
+
         if direction == 'right' and self.velocity != (-1, 0):
             self.velocity = (1, 0)
 
@@ -185,10 +185,10 @@ def main(stdscr):
                     continue
 
                 snake.shrink()
-                snake.draw()                
+                snake.draw()
 
             else:
-                
+
                 for apple in apples:
                     apple.update()
                     apple.draw()

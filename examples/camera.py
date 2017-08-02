@@ -5,6 +5,22 @@
 # Written by Dave Jones: https://gist.github.com/waveform80/a2621da13b88c3d751e31a15e97695c2
 # Tweaked for Unicorn HAT HD
 
+from signal import pause
+from sys import exit
+
+try:
+    from picamera import PiCamera
+except ImportError:
+    exit("This script requires the picamera module\nInstall with: sudo pip install picamera")
+
+try:
+    from PIL import Image
+except ImportError:
+    exit("This script requires the pillow module\nInstall with: sudo pip install pillow")
+
+import unicornhathd
+
+
 print("""Unicorn HAT HD: Raspberry Pi Camera Display
 
 Show a 16x16 feed from your Raspberry Pi camera!
@@ -13,10 +29,6 @@ Press Ctrl+C to exit.
 
 """)
 
-from picamera import PiCamera
-import unicornhathd
-from PIL import Image
-from signal import pause
 
 class DisplayOutput():
     def __init__(self):

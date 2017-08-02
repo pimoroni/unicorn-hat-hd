@@ -4,6 +4,7 @@ import time
 
 import unicornhathd
 
+
 unicornhathd.clear()
 unicornhathd.set_all(10, 0, 10)
 

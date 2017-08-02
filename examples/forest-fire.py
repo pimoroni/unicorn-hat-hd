@@ -1,8 +1,12 @@
 #!/usr/bin/env python
 
 import random
+from sys import exit
 
-import numpy
+try:
+    import numpy
+except ImportError:
+    exit("This script requires the numpy module\nInstall with: sudo pip install numpy")
 
 import unicornhathd
 

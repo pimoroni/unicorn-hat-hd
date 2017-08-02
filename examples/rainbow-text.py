@@ -12,6 +12,7 @@ except ImportError:
 
 import unicornhathd
 
+
 print("""Unicorn HAT HD: Text
 
 This example shows how to draw, display and scroll text in a regular TrueType font on Unicorn HAT HD.

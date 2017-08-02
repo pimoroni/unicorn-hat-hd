@@ -2,8 +2,8 @@
 
 import colorsys
 import math
-import time
 import random
+import time
 
 import unicornhathd
 
@@ -32,7 +32,7 @@ try:
           sc = (math.cos(step / 10.0) * 10.0) + 16.0
 
           h = math.sqrt(math.pow(x - dx, 2) + math.pow(y - dy, 2)) / sc
-          
+
           r, g, b = colorsys.hsv_to_rgb(h, 1, 1)
 
           r *= 255.0
@@ -40,8 +40,8 @@ try:
           b *= 255.0
 
           unicornhathd.set_pixel(x, y, r, g, b)
-      
+
       unicornhathd.show()
 
 except KeyboardInterrupt:
-    unicornhathd.off()  
+    unicornhathd.off()
