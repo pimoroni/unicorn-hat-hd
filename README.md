@@ -21,17 +21,24 @@ If you choose to download examples you'll find them in `/home/pi/Pimoroni/unicor
 
 ### Manual install:
 
+SPI needs to be enabled to communicate with the Unicorn Hat HD. If the SPI on your Pi is not enabled or you are unsure if it is:
+
+```bash
+sudo raspi-config nonint do_spi 0
+sudo reboot
+```
+
 #### Library install for Python 3:
 
 ```bash
-sudo apt-get install python3-pip python3-dev
+sudo apt-get install python3-pip python3-dev python3-spidev
 sudo pip3 install unicornhathd
 ```
 
 #### Library install for Python 2:
 
 ```bash
-sudo apt-get install python-pip python-dev
+sudo apt-get install python-pip python-dev python-spidev
 sudo pip install unicornhathd
 ```
 
@@ -45,7 +52,7 @@ sudo python3 setup.py install
 ```
 (or `sudo python setup.py install` whichever your primary Python environment may be)
 
-In all cases you will have to enable the i2c bus.
+In all cases you will have to enable the SPI bus.
 
 ## Documentation & Support
 
