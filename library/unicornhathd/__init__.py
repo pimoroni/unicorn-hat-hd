@@ -3,22 +3,20 @@
 import colorsys
 import time
 
+
 try:
     import spidev
 except ImportError:
-    sys.exit("This library requires the spidev module\nInstall with: sudo pip install spidev")
+    raise ImportError("This library requires the spidev module\nInstall with: sudo pip install spidev")
 
 try:
     import numpy
 except ImportError:
-    exit("This library requires the numpy module\nInstall with: sudo pip install numpy")
+    raise ImportError("This library requires the numpy module\nInstall with: sudo pip install numpy")
 
 
 __version__ = '0.0.2'
 
-_spi = spidev.SpiDev()
-_spi.open(0, 0)
-_spi.max_speed_hz = 9000000
 _SOF = 0x72
 _DELAY = 1.0/120
 
@@ -33,6 +31,20 @@ AUTO = None
 _rotation = 0
 _brightness = 0.5
 _buf = numpy.zeros((16,16,3), dtype=int)
+
+is_setup = False
+
+def setup():
+    global _spi, _buf, is_setup
+
+    if is_setup:
+        return
+
+    _spi = spidev.SpiDev()
+    _spi.open(0, 0)
+    _spi.max_speed_hz = 9000000
+
+    is_setup = True
 
 def brightness(b):
     """Set the display brightness between 0.0 and 1.0.
@@ -124,6 +136,7 @@ def off():
 
 def show():
     """Output the contents of the buffer to Unicorn HAT HD."""
+    setup()
     _spi.xfer2([_SOF] + (numpy.rot90(_buf,_rotation).reshape(768) * _brightness).astype(numpy.uint8).tolist())
     time.sleep(_DELAY)
 
