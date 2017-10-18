@@ -1,3 +1,10 @@
+unicornhathd (0.0.3) stable; urgency=low
+
+  * Deferred IO setup until first call to show
+  * Changed sys.exit to ImportError for warning about missing dependencies
+
+ -- Phil Howard <phil@pimoroni.com>  Wed, 18 Oct 2017 00:00:00 +0000
+
 unicornhathd (0.0.2) stable; urgency=low
 
   * Tweaked Python package MANIFEST

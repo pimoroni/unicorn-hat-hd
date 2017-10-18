@@ -1,3 +1,9 @@
+0.0.3
+-----
+
+* Deferred IO setup until first call to show
+* Changed sys.exit to ImportError for warning about missing dependencies
+
 0.0.2
 -----
 
