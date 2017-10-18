@@ -76,7 +76,7 @@ def set_pixel(x, y, r, g, b):
     :param b: Amount of blue from 0 to 255
 
     """
-    _buf[x][y] = r, g, b
+    _buf[int(x)][int(y)] = r, g, b
 
 def set_pixel_hsv(x, y, h, s=1.0, v=1.0):
     """set a single pixel to a colour using HSV.
@@ -93,7 +93,7 @@ def set_pixel_hsv(x, y, h, s=1.0, v=1.0):
     set_pixel(x, y, r, g, b)
 
 def get_pixel(x, y):
-    return tuple(_buf[x][y])
+    return tuple(_buf[int(x)][int(y)])
 
 def shade_pixels(shader):
     for x in range(WIDTH):
