@@ -119,7 +119,7 @@ function save(){
   var filename = prompt('Please enter a filename', 'mypaint');
   filename = filename.replace(/[^a-z0-9]/gi, '_').toLowerCase();
   $.get('/save/' + filename);
-  alert('Saved into saves/' + filename + '.py, \nRun with "sudo saves/' + filename + '.py"');
+  alert('Saved into saves/' + filename + '.py, \nRun with "./saves/' + filename + '.py"');
 }
 
 function clear(){

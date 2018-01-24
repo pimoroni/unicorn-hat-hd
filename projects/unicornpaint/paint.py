@@ -11,11 +11,13 @@ try:
 except ImportError:
     exit("This script requires the flask module\nInstall with: sudo pip install flask")
 
-import unicornhathd as unicorn
+import unicornhathd
 
 PORT = 8000
 
-width,height=unicorn.get_shape()
+unicornhathd.rotation(0)
+
+width,height=unicornhathd.get_shape()
 
 control_panel = """
     <table cellspacing="0" cellpadding="0" border-collapse="collapse">"""
@@ -50,42 +52,57 @@ def save(filename):
     except OSError:
         pass
     try:
-        data = unicorn.get_pixels()
+        data = unicornhathd.get_pixels()
+        data = repr(data)
+        data = data.replace('array', 'list')
         print(filename, data)
         file = open('saves/' + filename + '.py', 'w')
-        file.write('#!/usr/bin/env python\n')
-        file.write('import unicornhat, signal\n')
-        file.write('pixels = ' + str(unicorn.get_pixels()) + '\n')
-        file.write('unicornhat.set_pixels(pixels)\n')
-        file.write('unicornhat.show()\n')
-        file.write('signal.pause()')
+        file.write("""#!/usr/bin/env python
+import unicornhathd
+import signal
+
+unicornhathd.rotation(0)
+
+pixels = {}
+
+for x in range(unicornhathd.WIDTH):
+    for y in range(unicornhathd.HEIGHT):
+        r, g, b = pixels[x][y]
+        unicornhathd.set_pixel(x, y, r, g, b)
+
+unicornhathd.show()
+
+print("\\nShowing: {}\\nPress Ctrl+C to exit!")
+
+signal.pause()
+""".format(data, filename))
         file.close()
         os.chmod('saves/' + filename + '.py', 0o777 | stat.S_IEXEC)
 
-        return("ok" + str(unicorn.get_pixels()))
+        return("ok" + str(unicornhathd.get_pixels()))
     except AttributeError:
         print("Unable to save, please update")
-        print("unicornhat library!")
+        print("unicornhathdhathd library!")
         return("fail")
 
 @app.route('/clear')
 def clear():
-    s = threading.Thread(None,unicorn.clear)
+    s = threading.Thread(None,unicornhathd.clear)
     s.start()
     return "ok"
 
 @app.route('/show')
 def show():
-    s = threading.Thread(None,unicorn.show)
+    s = threading.Thread(None,unicornhathd.show)
     s.start()
     return "ok"
 
 @app.route('/pixel/<x>/<y>/<r>/<g>/<b>')
 def set_pixel(x, y, r, g, b):
     x, y, r, g, b = int(x), int(y), int(r), int(g), int(b)
-    unicorn.set_pixel(x, y, r, g, b)
+    unicornhathd.set_pixel(unicornhathd.WIDTH - 1 - x, y, r, g, b)
     return "ok"
 
 if __name__ == "__main__":
-    unicorn.brightness(0.5)
+    unicornhathd.brightness(0.5)
     app.run(host='0.0.0.0', port=PORT, debug=True)
