@@ -88,7 +88,7 @@ def set_pixel(x, y, r, g, b):
     :param b: Amount of blue from 0 to 255
 
     """
-    _buf[int(x)][int(y)] = r, g, b
+    _buf[int(y)][int(x)] = r, g, b
 
 def set_pixel_hsv(x, y, h, s=1.0, v=1.0):
     """set a single pixel to a colour using HSV.
@@ -105,7 +105,7 @@ def set_pixel_hsv(x, y, h, s=1.0, v=1.0):
     set_pixel(x, y, r, g, b)
 
 def get_pixel(x, y):
-    return tuple(_buf[int(x)][int(y)])
+    return tuple(_buf[int(y)][int(x)])
 
 def shade_pixels(shader):
     for x in range(WIDTH):
@@ -137,6 +137,6 @@ def off():
 def show():
     """Output the contents of the buffer to Unicorn HAT HD."""
     setup()
-    _spi.xfer2([_SOF] + (numpy.rot90(_buf,_rotation).reshape(768) * _brightness).astype(numpy.uint8).tolist())
+    _spi.xfer2([_SOF] + (numpy.flipud(numpy.rot90(_buf,_rotation)).reshape(768) * _brightness).astype(numpy.uint8).tolist())
     time.sleep(_DELAY)
 
