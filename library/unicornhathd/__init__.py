@@ -31,6 +31,7 @@ AUTO = None
 _rotation = 0
 _brightness = 0.5
 _buf = numpy.zeros((16,16,3), dtype=int)
+_rotated_buf = numpy.rot90(_buf, _rotation + 1)
 
 is_setup = False
 
@@ -63,9 +64,14 @@ def rotation(r):
     Actual rotation will be snapped to the nearest 90 degrees.
 
     """
-    global _rotation
+    global _rotation, _rotated_buf
 
     _rotation = int(round(r/90.0))
+
+     # rot90 returns a view of the original array,
+     # so we can rotate once here, and the view
+     # will be updated with whatever we draw
+    _rotated_buf = numpy.rot90(_buf, -_rotation + 1)
 
 def get_rotation():
     """Returns the display rotation in degrees."""
@@ -137,6 +143,6 @@ def off():
 def show():
     """Output the contents of the buffer to Unicorn HAT HD."""
     setup()
-    _spi.xfer2([_SOF] + (numpy.rot90(_buf,-_rotation + 1).reshape(768) * _brightness).astype(numpy.uint8).tolist())
+    _spi.xfer2([_SOF] + (_rotated_buf.reshape(768) * _brightness).astype(numpy.uint8).tolist())
     time.sleep(_DELAY)
 
