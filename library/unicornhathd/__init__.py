@@ -27,11 +27,33 @@ PHAT = None
 HAT = None
 PHAT_VERTICAL = None
 AUTO = None
+PANEL_SHAPE = (16, 16)
+
 
 _rotation = 0
 _brightness = 0.5
-_buf = numpy.zeros((16,16,3), dtype=int)
-_rotated_buf = numpy.rot90(_buf, _rotation + 1)
+_address = 0
+_buffer_width = 16
+_buffer_height = 16
+_addressing_enabled = False
+_buf = numpy.zeros((_buffer_width, _buffer_height, 3), dtype=int)
+
+class Display:
+    def __init__(self, enabled, x, y, rotation):
+        self.enabled = enabled
+        self.update(x, y, rotation)
+
+    def update(self, x, y, rotation):
+        self.x = x
+        self.y = y
+        self.rotation = rotation
+
+    def get_buffer_window(self, source):
+        view = source[self.x:self.x + PANEL_SHAPE[0], self.y:self.y + PANEL_SHAPE[1]]
+        return numpy.rot90(view, self.rotation + 1)
+
+
+_displays = [Display(False, 0, 0, 0) for _ in range(8)]
 
 is_setup = False
 
@@ -46,6 +68,28 @@ def setup():
     _spi.max_speed_hz = 9000000
 
     is_setup = True
+
+def enable_addressing(enabled=True):
+    global _addressing_enabled
+    _addressing_enabled = enabled
+
+def setup_buffer(width, height):
+    global _buffer_width, _buffer_height, _buf
+
+    _buffer_width = width
+    _buffer_height = height
+    _buf = numpy.zeros((_buffer_width, _buffer_height, 3), dtype=int)
+
+def enable_display(address, enabled=True):
+    _displays[address].enabled = enabled
+
+def setup_display(address, x, y, rotation):
+    _displays[address].update(x, y, rotation)
+    enable_display(address)
+
+def set_address(addr):
+    global _address
+    _address = addr
 
 def brightness(b):
     """Set the display brightness between 0.0 and 1.0.
@@ -64,14 +108,9 @@ def rotation(r):
     Actual rotation will be snapped to the nearest 90 degrees.
 
     """
-    global _rotation, _rotated_buf
+    global _rotation
 
     _rotation = int(round(r/90.0))
-
-     # rot90 returns a view of the original array,
-     # so we can rotate once here, and the view
-     # will be updated with whatever we draw
-    _rotated_buf = numpy.rot90(_buf, -_rotation + 1)
 
 def get_rotation():
     """Returns the display rotation in degrees."""
@@ -94,7 +133,7 @@ def set_pixel(x, y, r, g, b):
     :param b: Amount of blue from 0 to 255
 
     """
-    _buf[int(x)][int(y)] = r, g, b
+    _buf[int(x)][int(y)] = r, b, g
 
 def set_pixel_hsv(x, y, h, s=1.0, v=1.0):
     """set a single pixel to a colour using HSV.
@@ -125,7 +164,7 @@ def get_pixels():
 def get_shape():
     """Return the shape (width, height) of the display."""
 
-    return WIDTH, HEIGHT
+    return _buffer_width, _buffer_height
 
 def clear():
     """Clear the buffer."""
@@ -143,6 +182,19 @@ def off():
 def show():
     """Output the contents of the buffer to Unicorn HAT HD."""
     setup()
-    _spi.xfer2([_SOF] + (_rotated_buf.reshape(768) * _brightness).astype(numpy.uint8).tolist())
+    if _addressing_enabled:
+        for address in range(8):
+            display = _displays[address]
+            if display.enabled:
+                if _buffer_width == _buffer_height or _rotation in [0, 2]:
+                    window = display.get_buffer_window(numpy.rot90(_buf, _rotation))
+                else:
+                    window = display.get_buffer_window(numpy.rot90(_buf, _rotation))
+
+                _spi.xfer2([_SOF + 1 + address] + (window.reshape(768) * _brightness).astype(numpy.uint8).tolist())
+                time.sleep(_DELAY)
+    else:
+        _spi.xfer2([_SOF] + (numpy.rot90(_buf, _rotation).reshape(768) * _brightness).astype(numpy.uint8).tolist())
+
     time.sleep(_DELAY)
 
