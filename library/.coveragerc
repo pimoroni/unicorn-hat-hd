@@ -1,0 +1,4 @@
+[run]
+source = unicornhathd
+omit =
+    .tox/*
