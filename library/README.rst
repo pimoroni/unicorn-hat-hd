@@ -1,5 +1,7 @@
 |Unicorn HAT HD| http://shop.pimoroni.com/products/unicorn-hat-hd
 
+|Build Status| |Coverage Status| |PyPi Package| |Python Versions|
+
 Installing
 ----------
 
@@ -84,4 +86,11 @@ Documentation & Support
 -  Get help - http://forums.pimoroni.com/c/support
 
 .. |Unicorn HAT HD| image:: unicorn-hat-hd-logo.png
-
+.. |Build Status| image:: https://travis-ci.com/pimoroni/unicorn-hat-hd.svg?branch=master
+   :target: https://travis-ci.com/pimoroni/unicorn-hat-hd
+.. |Coverage Status| image:: https://coveralls.io/repos/github/pimoroni/unicorn-hat-hd/badge.svg?branch=master
+   :target: https://coveralls.io/github/pimoroni/unicorn-hat-hd?branch=master
+.. |PyPi Package| image:: https://img.shields.io/pypi/v/unicornhathd.svg
+   :target: https://pypi.python.org/pypi/unicornhathd
+.. |Python Versions| image:: https://img.shields.io/pypi/pyversions/unicornhathd.svg
+   :target: https://pypi.python.org/pypi/unicornhathd
