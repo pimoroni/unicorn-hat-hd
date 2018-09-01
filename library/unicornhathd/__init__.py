@@ -13,12 +13,12 @@ import time
 try:
     import spidev
 except ImportError:
-    raise ImportError("This library requires the spidev module\nInstall with: sudo pip install spidev")
+    raise ImportError('This library requires the spidev module\nInstall with: sudo pip install spidev')
 
 try:
     import numpy
 except ImportError:
-    raise ImportError("This library requires the numpy module\nInstall with: sudo pip install numpy")
+    raise ImportError('This library requires the numpy module\nInstall with: sudo pip install numpy')
 
 
 __version__ = '0.0.3'
