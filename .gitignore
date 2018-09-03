@@ -2,6 +2,7 @@ __pycache__/
 sphinx/_build/
 *.py[cod]
 *.swp
+*.upload
 dist/
 sdist/
 env/
@@ -25,3 +26,7 @@ library/debian/
 packaging/*tar.xz
 .DS_Store
 sphinx.virtualenv
+.coverage
+.pytest_cache
+.tox
+.vscode
