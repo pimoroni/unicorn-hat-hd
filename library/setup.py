@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-Copyright (c) 2017 Pimoroni
+Copyright (c) 2017 Pimoroni.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -38,17 +38,17 @@ classifiers = ['Development Status :: 5 - Production/Stable',
                'Topic :: System :: Hardware']
 
 setup(
-    name            = 'unicornhathd',
-    version         = '0.0.3',
-    author          = 'Philip Howard',
-    author_email    = 'phil@pimoroni.com',
-    description     = """Python library for driving Pimoroni Unicorn HAT HD""",
-    long_description= open('README.txt').read() + open('CHANGELOG.txt').read(),
-    license         = 'MIT',
-    keywords        = 'Raspberry Pi LED',
-    url             = 'http://www.pimoroni.com',
-    classifiers     = classifiers,
-    py_modules      = [],
-    packages        = ['unicornhathd'],
-    install_requires= ['spidev']
+    name='unicornhathd',
+    version='0.0.3',
+    author='Philip Howard',
+    author_email='phil@pimoroni.com',
+    description="""Python library for driving Pimoroni Unicorn HAT HD""",
+    long_description=open('README.rst').read() + '\n' + open('CHANGELOG.txt').read(),
+    license='MIT',
+    keywords='Raspberry Pi LED',
+    url='http://www.pimoroni.com',
+    classifiers=classifiers,
+    py_modules=[],
+    packages=['unicornhathd'],
+    install_requires=['spidev']
 )
