@@ -7,7 +7,7 @@ try:
     from picamera import PiCamera
     from picamera.array import PiRGBArray
 except ImportError:
-    exit("This script requires the picamera module\nInstall with: sudo pip install picamera")
+    exit('This script requires the picamera module\nInstall with: sudo pip install picamera')
 
 import unicornhathd
 
@@ -31,4 +31,3 @@ while True:
             unicornhathd.set_pixel(x, y, r, g, b)
 
     unicornhathd.show()
-

@@ -16,7 +16,7 @@ Press Ctrl+C to exit!
 """)
 
 unicornhathd.rotation(0)
-u_width,u_height = unicornhathd.get_shape()
+u_width, u_height = unicornhathd.get_shape()
 
 # Generate a lookup table for 8bit hue to RGB conversion
 hue_to_rgb = []
@@ -24,56 +24,57 @@ hue_to_rgb = []
 for i in range(0, 255):
     hue_to_rgb.append(colorsys.hsv_to_rgb(i / 255.0, 1, 1))
 
+
 def gradient(x, y, step):
     g = x * 16
     b = y * 16
     r = 255 - (x * 16)
-    
     return (r, g, b)
+
 
 # twisty swirly goodness
 def swirl(x, y, step):
-    x -= (u_width/2)
-    y -= (u_height/2)
-    dist = math.sqrt(pow(x, 2)+pow(y,2)) / 2.0
+    x -= (u_width / 2)
+    y -= (u_height / 2)
+    dist = math.sqrt(pow(x, 2) + pow(y, 2)) / 2.0
     angle = (step / 10.0) + (dist * 1.5)
-    s = math.sin(angle);
-    c = math.cos(angle);
-    xs = x * c - y * s;
-    ys = x * s + y * c;
+    s = math.sin(angle)
+    c = math.cos(angle)
+    xs = x * c - y * s
+    ys = x * s + y * c
     r = abs(xs + ys)
     r = r * 12.0
     r -= 20
     return (r, r + (s * 130), r + (c * 130))
 
+
 # roto-zooming checker board
 def checker(x, y, step):
-    x -= (u_width/2)
-    y -= (u_height/2)
+    x -= (u_width / 2)
+    y -= (u_height / 2)
     angle = (step / 10.0)
-    s = math.sin(angle);
-    c = math.cos(angle);
-    xs = x * c - y * s;
-    ys = x * s + y * c;
+    s = math.sin(angle)
+    c = math.cos(angle)
+    xs = x * c - y * s
+    ys = x * s + y * c
     xs -= math.sin(step / 200.0) * 40.0
     ys -= math.cos(step / 200.0) * 40.0
     scale = step % 20
     scale /= 20
-    scale = (math.sin(step / 50.0) / 8.0) + 0.25;
+    scale = (math.sin(step / 50.0) / 8.0) + 0.25
     xs *= scale
     ys *= scale
     xo = abs(xs) - int(abs(xs))
     yo = abs(ys) - int(abs(ys))
-    l = 0 if (math.floor(xs) + math.floor(ys)) % 2 else 1 if xo > .1 and yo > .1 else .5
+    v = 0 if (math.floor(xs) + math.floor(ys)) % 2 else 1 if xo > .1 and yo > .1 else .5
     r, g, b = hue_to_rgb[step % 255]
-    return (r * (l * 255), g * (l * 255), b * (l * 255))
+    return (r * (v * 255), g * (v * 255), b * (v * 255))
+
 
 # weeee waaaah
 def blues_and_twos(x, y, step):
-    x -= (u_width/2)
-    y -= (u_height/2)
-    xs = (math.sin((x + step) / 10.0) / 2.0) + 1.0
-    ys = (math.cos((y + step) / 10.0) / 2.0) + 1.0
+    x -= (u_width / 2)
+    y -= (u_height / 2)
     scale = math.sin(step / 6.0) / 1.5
     r = math.sin((x * scale) / 1.0) + math.cos((y * scale) / 1.0)
     b = math.sin(x * scale / 2.0) + math.cos(y * scale / 2.0)
@@ -82,6 +83,7 @@ def blues_and_twos(x, y, step):
     b -= r
     b /= 1.4
     return (r * 255, (b + g) * 255, g * 255)
+
 
 # rainbow search spotlights
 def rainbow_search(x, y, step):
@@ -93,11 +95,12 @@ def rainbow_search(x, y, step):
     b = math.sin((x + ys) * scale) + math.cos((y + ys) * scale)
     return (r * 255, g * 255, b * 255)
 
+
 # zoom tunnel
 def tunnel(x, y, step):
     speed = step / 100.0
-    x -= (u_width/2)
-    y -= (u_height/2)
+    x -= (u_width / 2)
+    y -= (u_height / 2)
     xo = math.sin(step / 27.0) * 2
     yo = math.cos(step / 18.0) * 2
     x += xo
@@ -111,7 +114,7 @@ def tunnel(x, y, step):
         angle = math.atan(x / y)
     if y > 0:
         angle += math.pi
-    angle /= 2 * math.pi # convert angle to 0...1 range
+    angle /= 2 * math.pi  # convert angle to 0...1 range
     hyp = math.sqrt(math.pow(x, 2) + math.pow(y, 2))
     shade = hyp / 2.1
     shade = 1 if shade > 1 else shade
@@ -127,9 +130,13 @@ def tunnel(x, y, step):
     col = (col[0] * shade, col[1] * shade, col[2] * shade)
     return (col[0] * 255, col[1] * 255, col[2] * 255)
 
+
+def current_milli_time():
+    return int(round(time.time() * 1000))
+
+
 effects = [gradient, tunnel, rainbow_search, checker, swirl]
 
-current_milli_time = lambda: int(round(time.time() * 1000))
 
 step = 0
 
