@@ -1,6 +1,11 @@
 ![Unicorn HAT HD](unicorn-hat-hd-logo.png)
 http://shop.pimoroni.com/products/unicorn-hat-hd 
 
+[![Build Status](https://travis-ci.com/pimoroni/unicorn-hat-hd.svg?branch=master)](https://travis-ci.com/pimoroni/unicorn-hat-hd)
+[![Coverage Status](https://coveralls.io/repos/github/pimoroni/unicorn-hat-hd/badge.svg?branch=master)](https://coveralls.io/github/pimoroni/unicorn-hat-hd?branch=master)
+[![PyPi Package](https://img.shields.io/pypi/v/unicornhathd.svg)](https://pypi.python.org/pypi/unicornhathd)
+[![Python Versions](https://img.shields.io/pypi/pyversions/unicornhathd.svg)](https://pypi.python.org/pypi/unicornhathd)
+
 ## Installing
 
 ### Full install (recommended):
