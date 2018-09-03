@@ -11,12 +11,12 @@ from sys import exit
 try:
     from picamera import PiCamera
 except ImportError:
-    exit("This script requires the picamera module\nInstall with: sudo pip install picamera")
+    exit('This script requires the picamera module\nInstall with: sudo pip install picamera')
 
 try:
     from PIL import Image
 except ImportError:
-    exit("This script requires the pillow module\nInstall with: sudo pip install pillow")
+    exit('This script requires the pillow module\nInstall with: sudo pip install pillow')
 
 import unicornhathd
 
@@ -45,6 +45,7 @@ class DisplayOutput():
                 self.hat.set_pixel(x, y, r, g, b)
 
         self.hat.show()
+
 
 with PiCamera() as camera:
     camera.resolution = (64, 64)

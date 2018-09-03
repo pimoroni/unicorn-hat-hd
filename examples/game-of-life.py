@@ -8,7 +8,7 @@ import unicornhathd
 
 print("""Unicorn HAT HD: Game Of Life
 
-Runs Conway's Game Of Life on your Unicorn HAT, this starts 
+Runs Conway's Game Of Life on your Unicorn HAT, this starts
 with a random spread of life, so results may vary!
 """)
 
@@ -19,14 +19,15 @@ except NameError:
 
 unicornhathd.rotation(0)
 unicornhathd.brightness(0.5)
-width,height=unicornhathd.get_shape()
+width, height = unicornhathd.get_shape()
 
-size = width*height
+size = width * height
+
 
 class GameOfLife:
     def __init__(self):
         self.board = [int(7 * random.getrandbits(1)) for _ in xrange(size)]
-        self.color = [[154, 154, 174], [0, 0, 255], [0, 0, 200], [0, 0, 160], [0, 0, 140], [0, 0, 90], [0, 0, 60], [0, 0, 0,]]
+        self.color = [[154, 154, 174], [0, 0, 255], [0, 0, 200], [0, 0, 160], [0, 0, 140], [0, 0, 90], [0, 0, 60], [0, 0, 0]]
 
     def value(self, x, y):
         index = ((x % width) * height) + (y % height)
@@ -38,7 +39,7 @@ class GameOfLife:
             for j in xrange(3):
                 if i == 1 and j == 1:
                     continue
-                if self.value(x + i -1, y + j -1) == 0:
+                if self.value(x + i - 1, y + j - 1) == 0:
                     sum = sum + 1
         return sum
 
@@ -71,9 +72,10 @@ class GameOfLife:
     def show_board(self):
         for i in xrange(width):
             for j in xrange(height):
-               rgb = self.color[self.value(i, j)]
-               unicornhathd.set_pixel(i, j, rgb[0], rgb[1], rgb[2])
+                rgb = self.color[self.value(i, j)]
+                unicornhathd.set_pixel(i, j, rgb[0], rgb[1], rgb[2])
         unicornhathd.show()
+
 
 life = GameOfLife()
 

@@ -53,11 +53,11 @@ except ImportError:
 
 import unicornhathd as unicorn
 
-print('''
+print("""
     ****************************************************************
     animated weather icons for the unicorn-hat-hd by LovebootCaptain
     ****************************************************************
-    ''')
+    """)
 
 unicorn.brightness(1)
 unicorn.rotation(0)
@@ -72,10 +72,10 @@ cycle_time = 0.25
 
 
 def help():
-    print('''
+    print("""
     Usage:
     python weather-icons.py options
-    
+
     options:
     loop
     image-file.png
@@ -83,10 +83,10 @@ def help():
     example:
     weather-icons.py loop
     weather-icons.py clear-day.png
-    
-    try one of the files from this list: 
+
+    try one of the files from this list:
     {}
-    '''.format(", ".join(os.listdir(folder_path))))
+    """.format(', '.join(os.listdir(folder_path))))
 
 
 def draw_animation(image):

@@ -6,7 +6,7 @@ from sys import exit
 try:
     import numpy
 except ImportError:
-    exit("This script requires the numpy module\nInstall with: sudo pip install numpy")
+    exit('This script requires the numpy module\nInstall with: sudo pip install numpy')
 
 import unicornhathd
 
@@ -29,7 +29,11 @@ forest_height = height * scale
 
 hood_size = 3
 avg_size = scale
-get_neighbours = lambda x, y, z : [(x2, y2) for x2 in range(x-(z-1), x+z) for y2 in range(y-(z-1), y+z) if (-1 < x < forest_width and -1 < y < forest_height and (x != x2 or y != y2) and (0 <= x2 < forest_width) and (0 <= y2 < forest_height))]
+
+
+def get_neighbours(x, y, z):
+    return [(x2, y2) for x2 in range(x - (z - 1), x + z) for y2 in range(y - (z - 1), y + z) if (-1 < x < forest_width and -1 < y < forest_height and (x != x2 or y != y2) and (0 <= x2 < forest_width) and (0 <= y2 < forest_height))]
+
 
 initial_trees = 0.55
 p = 0.01
@@ -39,9 +43,11 @@ tree = [0, 255, 0]
 burning = [255, 0, 0]
 space = [0, 0, 0]
 
+
 def initialise():
     forest = [[tree if random.random() <= initial_trees else space for x in range(forest_width)] for y in range(forest_height)]
     return forest
+
 
 def update_forest(forest):
     new_forest = [[space for x in range(forest_width)] for y in range(forest_height)]
@@ -56,6 +62,7 @@ def update_forest(forest):
                 new_forest[x][y] = (burning if any([forest[n[0]][n[1]] == burning for n in neighbours]) or random.random() <= f else tree)
     return new_forest
 
+
 def average_forest(forest):
     avg_forest = [[space for x in range(width)] for y in range(height)]
 
@@ -69,6 +76,7 @@ def average_forest(forest):
 
     return avg_forest
 
+
 def show_forest(forest):
     avg_forest = average_forest(forest)
 
@@ -79,12 +87,14 @@ def show_forest(forest):
 
     unicornhathd.show()
 
+
 def main():
     forest = initialise()
 
     while True:
         show_forest(forest)
         forest = update_forest(forest)
+
 
 try:
     main()

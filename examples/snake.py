@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import curses
-import os
 import random
 import time
 
@@ -19,6 +18,7 @@ CONTROLS = {
     curses.KEY_RIGHT: 'right'
 }
 
+
 class Snake:
     def __init__(self, canvas, x=5, y=5):
         self.position = (x, y)
@@ -27,8 +27,8 @@ class Snake:
         self.length = 1
         self.score = 0
         self.tail = []
-        self.colour_head = (128,0,255)
-        self.colour_tail = (32,0,64)
+        self.colour_head = (128, 0, 255)
+        self.colour_tail = (32, 0, 64)
         self.canvas = canvas
         self.eaten = []
 
@@ -85,7 +85,7 @@ class Snake:
         x += v_x
         y += v_y
         c_x, c_y = self.canvas.get_shape()
-        c_y -= 3 # 3 pixels along the top for score
+        c_y -= 3  # 3 pixels along the top for score
         x %= c_x
         y %= c_y
 
@@ -108,7 +108,8 @@ class Snake:
 
 
 class Apple:
-    colours = [(128,0,0), (0,128,0), (96,96,0)]
+    colours = [(128, 0, 0), (0, 128, 0), (96, 96, 0)]
+
     def __init__(self, canvas):
         self.canvas = canvas
 
@@ -121,9 +122,9 @@ class Apple:
         c_x, c_y = self.canvas.get_shape()
         c_y -= 3
 
-        self.position = (random.randint(0, c_x-1), random.randint(0, c_y-1))
+        self.position = (random.randint(0, c_x - 1), random.randint(0, c_y - 1))
 
-        self.score = random.randint(0, len(self.colours)-1)
+        self.score = random.randint(0, len(self.colours) - 1)
 
         self.eaten = False
 
@@ -135,7 +136,7 @@ class Apple:
         return self.score + 1
 
     def update(self):
-        pass # What's an apple 'gon do?
+        pass  # What's an apple 'gon do?
 
     def draw(self):
         if self.eaten:
@@ -148,9 +149,9 @@ class Apple:
 
 def main(stdscr):
     stdscr.nodelay(1)
-    stdscr.addstr(2, 5, "Unicorn HAT HD: Snake")
-    stdscr.addstr(4, 5, "w = UP, s = DOWN, a = LEFT, d = RIGHT")
-    stdscr.addstr(6, 5, "Press Ctrl+C to exit!")
+    stdscr.addstr(2, 5, 'Unicorn HAT HD: Snake')
+    stdscr.addstr(4, 5, 'w = UP, s = DOWN, a = LEFT, d = RIGHT')
+    stdscr.addstr(6, 5, 'Press Ctrl+C to exit!')
 
     width, height = unicornhathd.get_shape()
 
@@ -164,8 +165,6 @@ def main(stdscr):
 
     apples = [Apple(unicornhathd) for x in range(num_apples)]
 
-    t_start = time.time()
-
     hit = False
 
     try:
@@ -174,8 +173,7 @@ def main(stdscr):
 
             for x in range(16):
                 for y in range(3):
-                    unicornhathd.set_pixel(x, 15-y, 10, 10, 10)
-
+                    unicornhathd.set_pixel(x, 15 - y, 10, 10, 10)
 
             if hit:
                 if snake.length == 1:
@@ -215,12 +213,11 @@ def main(stdscr):
             step += 1
             time.sleep(0.1)
 
-        t_time = time.time() - t_start
-        print("You scored: {}".format(snake.score))
+        print('You scored: {}'.format(snake.score))
 
     except KeyboardInterrupt:
         pass
 
-if __name__ == "__main__":
-    curses.wrapper(main)
 
+if __name__ == '__main__':
+    curses.wrapper(main)

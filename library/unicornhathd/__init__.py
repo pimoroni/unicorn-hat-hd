@@ -33,6 +33,8 @@ PHAT = None
 HAT = None
 PHAT_VERTICAL = None
 AUTO = None
+PANEL_SHAPE = (16, 16)
+
 
 _rotation = 0
 _brightness = 0.5

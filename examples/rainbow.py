@@ -2,7 +2,6 @@
 
 import colorsys
 import math
-import random
 import time
 
 import unicornhathd
@@ -21,27 +20,28 @@ unicornhathd.rotation(0)
 step = 0
 try:
     while True:
-      step += 1
-      for x in range(0, 16):
-        for y in range(0, 16):
-          dx = 7
-          dy = 7
+        step += 1
+        for x in range(0, 16):
+            for y in range(0, 16):
+                dx = 7
+                dy = 7
 
-          dx = (math.sin(step / 20.0) * 15.0) + 7.0
-          dy = (math.cos(step / 15.0) * 15.0) + 7.0
-          sc = (math.cos(step / 10.0) * 10.0) + 16.0
+                dx = (math.sin(step / 20.0) * 15.0) + 7.0
+                dy = (math.cos(step / 15.0) * 15.0) + 7.0
+                sc = (math.cos(step / 10.0) * 10.0) + 16.0
 
-          h = math.sqrt(math.pow(x - dx, 2) + math.pow(y - dy, 2)) / sc
+                h = math.sqrt(math.pow(x - dx, 2) + math.pow(y - dy, 2)) / sc
 
-          r, g, b = colorsys.hsv_to_rgb(h, 1, 1)
+                r, g, b = colorsys.hsv_to_rgb(h, 1, 1)
 
-          r *= 255.0
-          g *= 255.0
-          b *= 255.0
+                r *= 255.0
+                g *= 255.0
+                b *= 255.0
 
-          unicornhathd.set_pixel(x, y, r, g, b)
+                unicornhathd.set_pixel(x, y, r, g, b)
 
-      unicornhathd.show()
+        unicornhathd.show()
+        time.sleep(1.0 / 60)
 
 except KeyboardInterrupt:
     unicornhathd.off()

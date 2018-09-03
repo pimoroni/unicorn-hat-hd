@@ -1,14 +1,13 @@
 #!/usr/bin/env python
 
 import colorsys
-import signal
 import time
 from sys import exit
 
 try:
     from PIL import Image, ImageDraw, ImageFont
 except ImportError:
-    exit("This script requires the pillow module\nInstall with: sudo pip install pillow")
+    exit('This script requires the pillow module\nInstall with: sudo pip install pillow')
 
 import unicornhathd
 
@@ -23,22 +22,22 @@ See: http://pillow.readthedocs.io/en/3.1.x/reference/
 
 """)
 
-############# Change the text you want to display, and font, here ################
+# ========== Change the text you want to display, and font, here ================
 
-TEXT = "Hello World! How are you today? This is a real font!"
+TEXT = 'Hello World! How are you today? This is a real font!'
 
-FONT = ("/usr/share/fonts/truetype/freefont/FreeSansBold.ttf", 12)
+FONT = ('/usr/share/fonts/truetype/freefont/FreeSansBold.ttf', 12)
 
 # Use `fc-list` to show a list of installed fonts on your system,
 # or `ls /usr/share/fonts/` and explore.
 
 # sudo apt install fonts-droid
-#FONT = ("/usr/share/fonts/truetype/droid/DroidSans.ttf", 12)
+# FONT = ('/usr/share/fonts/truetype/droid/DroidSans.ttf', 12)
 
 # sudo apt install fonts-roboto
-#FONT = ("/usr/share/fonts/truetype/roboto/Roboto-Bold.ttf", 10)
+# FONT = ('/usr/share/fonts/truetype/roboto/Roboto-Bold.ttf', 10)
 
-################# Now, let's draw some amazing rainbowy text! ####################
+# ================ Now, let's draw some amazing rainbowy text! ===================
 
 # Get the width/height of Unicorn HAT HD.
 # These will normally be 16x16 but it's good practise not to hard-code such numbers,
@@ -65,7 +64,7 @@ text_width, text_height = font.getsize(TEXT)
 text_width += width + text_x
 
 # Now let's create a blank canvas wide enough to accomodate our text
-image = Image.new("RGB", (text_width,max(height, text_height)), (0,0,0))
+image = Image.new('RGB', (text_width, max(height, text_height)), (0, 0, 0))
 
 # To draw on our image, we must use PIL's ImageDraw
 draw = ImageDraw.Draw(image)
@@ -102,8 +101,7 @@ for scroll in range(text_width - width):
             # Get the r, g, b colour triplet from pixel x,y of our text image
             # Our text is white on a black background, so these will all be shades of black/grey/white
             # ie 255,255,255 or 0,0,0 or 128,128,128
-            pixel = image.getpixel((x+scroll, y))
-
+            pixel = image.getpixel((x + scroll, y))
 
             # Now we want to turn the colour of our text - shades of grey remember - into a mask for our rainbow.
             # We do this by dividing it by 255, which converts it to the range 0.0 to 1.0
@@ -119,7 +117,7 @@ for scroll in range(text_width - width):
             b = int(bb * b)
 
             # Finally we colour in our finished pixel on Unicorn HAT HD
-            unicornhathd.set_pixel(width-1-x, y, r, g, b)
+            unicornhathd.set_pixel(width - 1 - x, y, r, g, b)
 
     # Finally, for each step in our scroll, we show the result on Unicorn HAT HD
     unicornhathd.show()
