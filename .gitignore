@@ -2,6 +2,7 @@ __pycache__/
 sphinx/_build/
 *.py[cod]
 *.swp
+*.upload
 dist/
 sdist/
 env/
