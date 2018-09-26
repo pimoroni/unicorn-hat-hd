@@ -21,7 +21,7 @@ except ImportError:
     raise ImportError('This library requires the numpy module\nInstall with: sudo pip install numpy')
 
 
-__version__ = '0.0.3'
+__version__ = '0.0.4'
 
 _SOF = 0x72
 _DELAY = 1.0 / 120
