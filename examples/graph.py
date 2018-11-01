@@ -35,7 +35,7 @@ values = [(math.sin((x / 16.0) * math.pi) + 1.0) / 2.0 for x in range(32)]
 
 try:
     while True:
-        for x in range(u_width / bar_width):
+        for x in range(u_width // bar_width):
             value = (values[x] * u_height)   # Scale the graph range 0.0 to 1.0 to the display height
             # Trippy bar colours!
             # bar_colour = [int(c * 255) for c in hsv_to_rgb(values[x] / 2, 1.0, 1.0)]
