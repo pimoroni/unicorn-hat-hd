@@ -40,6 +40,6 @@ while True:
                 g = int(rgb[1]*255.0)
                 b = int(rgb[2]*255.0)
                 unicorn.set_pixel(x, y, r, g, b)  # sets pixels on the hat
-            unicorn.show()  # show the pixels
-            time.sleep(0.005)  # tiny gap, sets frames to a smooth 200/sec
-        time.sleep(0.8)  # waiting time between heartbeats
+        unicorn.show()  # show the pixels
+        time.sleep(0.005)  # tiny gap, sets frames to a smooth 200/sec
+    time.sleep(0.8)  # waiting time between heartbeats
