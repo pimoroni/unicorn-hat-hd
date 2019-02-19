@@ -13,7 +13,7 @@ import unicornhathd
 
 print("""Unicorn HAT HD: Show a PNG image!
 
-This basic example shows use of the Python Pillow library:
+This basic example shows use of the Python Pillow library.
 
 The tiny 16x16 bosses in lofi.png are from Oddball:
 http://forums.tigsource.com/index.php?topic=8834.0
@@ -25,8 +25,8 @@ Press Ctrl+C to exit!
 
 """)
 
-unicornhathd.rotation(90)
-unicornhathd.brightness(0.5)
+unicornhathd.rotation(0)
+unicornhathd.brightness(0.6)
 
 width, height = unicornhathd.get_shape()
 

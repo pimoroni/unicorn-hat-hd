@@ -22,6 +22,7 @@ Press Ctrl+C to exit!
 scale = 3
 
 unicornhathd.rotation(0)
+unicornhathd.brightness(0.6)
 width, height = unicornhathd.get_shape()
 
 forest_width = width * scale

@@ -16,6 +16,7 @@ Press Ctrl+C to exit!
 """)
 
 unicornhathd.rotation(0)
+unicornhathd.brightness(0.6)
 
 step = 0
 try:

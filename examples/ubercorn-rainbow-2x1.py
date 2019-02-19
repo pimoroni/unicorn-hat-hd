@@ -7,13 +7,15 @@ import time
 import unicornhathd
 
 
-print("""Rainbow 2x1
+print("""Ubercorn rainbow 2x1
 
 An example of how to use a 2-wide by 1-tall pair of Ubercorn matrices.
 
 Press Ctrl+C to exit!
 
 """)
+
+unicornhathd.brightness(0.6)
 
 # Enable addressing for Ubercorn matrices
 unicornhathd.enable_addressing()
@@ -26,6 +28,7 @@ unicornhathd.setup_display(0, 0, 0, 0)
 unicornhathd.setup_display(1, 16, 0, 0)
 
 step = 0
+
 try:
     while True:
         step += 1
