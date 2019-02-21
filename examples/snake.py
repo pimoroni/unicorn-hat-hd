@@ -6,6 +6,16 @@ import time
 
 import unicornhathd
 
+print("""Unicorn HAT HD: Snake
+
+If you had a Nokia phone in the 90s you'll know this.
+
+Press Ctrl+C to exit!
+
+""")
+
+unicornhathd.rotation(90)
+unicornhathd.brightness(0.6)
 
 CONTROLS = {
     ord('w'): 'up',
@@ -216,8 +226,8 @@ def main(stdscr):
         print('You scored: {}'.format(snake.score))
 
     except KeyboardInterrupt:
-        pass
-
+        unicornhathd.clear()
+        unicornhathd.off()
 
 if __name__ == '__main__':
     curses.wrapper(main)

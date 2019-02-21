@@ -2,13 +2,14 @@
 
 import math
 import time
+
 # import random                    # Required for random values
 # from colorsys import hsv_to_rgb  # required for trippy bar colours
 
 import unicornhathd
 
 
-print("""Unicorn HAT HD: graph.py
+print("""Unicorn HAT HD: Graph
 
 This graph demo shows how you might display a range of values on UHHD.
 
@@ -16,7 +17,7 @@ Press Ctrl+C to exit!
 
 """)
 
-unicornhathd.rotation(0)
+unicornhathd.rotation(90)
 unicornhathd.brightness(0.6)
 u_width, u_height = unicornhathd.get_shape()
 

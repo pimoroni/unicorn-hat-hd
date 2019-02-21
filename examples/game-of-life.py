@@ -8,8 +8,10 @@ import unicornhathd
 
 print("""Unicorn HAT HD: Game Of Life
 
-Runs Conway's Game Of Life on your Unicorn HAT, this starts
-with a random spread of life, so results may vary!
+Runs Conway's Game Of Life on your Unicorn HAT HD, this
+starts with a random spread of life, so results may vary!
+
+Press Ctrl+C to exit!
 """)
 
 try:
@@ -18,7 +20,7 @@ except NameError:
     xrange = range
 
 unicornhathd.rotation(0)
-unicornhathd.brightness(0.5)
+unicornhathd.brightness(0.6)
 width, height = unicornhathd.get_shape()
 
 size = width * height
@@ -79,6 +81,7 @@ class GameOfLife:
 
 life = GameOfLife()
 
+
 try:
     while not life.all_dead():
         life.next_generation()
@@ -86,4 +89,5 @@ try:
         time.sleep(0.05)
 
 except KeyboardInterrupt:
+    unicornhathd.clear()
     unicornhathd.off()
