@@ -19,7 +19,7 @@ Press Ctrl+C to exit!
 """)
 
 unicornhathd.rotation(90)
-unicornhathd(0.6)
+unicornhathd.brightness(0.6)
 
 wrd_rgb = [
     [154, 173, 154], [0, 255, 0], [0, 235, 0], [0, 220, 0],
