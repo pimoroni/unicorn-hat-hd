@@ -3,6 +3,18 @@ import time
 import colorsys
 import numpy
 
+print ("""Unicorn HAT HD: Heart Beats
+
+Displaying a beating heart...
+
+Your Unicorn HAT HD loves you.
+
+<3
+
+Press Ctrl+C to exit!
+
+""")
+
 unicornhathd.brightness(1)
 # need to rotate the image to have the heart the right way up
 unicornhathd.rotation(90)
