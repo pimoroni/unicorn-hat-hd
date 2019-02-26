@@ -35,7 +35,7 @@ while True:
                 h = 0.0  # red
                 s = 1.0  # saturation at the top of the red scale
                 v = heart[x, y] / float(i)  # brightness depends on range
-                rgb = colorsys.hsv_to_rgb(h, s, v)  # convert hsv back to RGB
+                r, g, b = colorsys.hsv_to_rgb(h, s, v)  # convert hsv back to RGB
                 r = int(rgb[0]*255.0)  # makes 0-1 range > 0-255 range
                 g = int(rgb[1]*255.0)
                 b = int(rgb[2]*255.0)
