@@ -29,7 +29,7 @@ heart = numpy.array(heart)
 while True:
     #  go through the range 1-10 backwards, then back up
     #  the 2* makes a ba-BUMP for the heart
-    for i in 2*(range(1, 11)[::-1]+range(1, 10)):
+    for i in 2 * (range(10,0,-1) + range(1, 10)):
         for y in range(16):
             for x in range(16):
                 h = 0.0  # red
