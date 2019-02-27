@@ -13,6 +13,8 @@ Press Ctrl+C to exit!
 
 """)
 
+unicornhathd.brightness(0.6)
+
 star_count = 25
 star_speed = 0.05
 stars = []

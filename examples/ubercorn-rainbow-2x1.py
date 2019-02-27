@@ -7,22 +7,32 @@ import time
 import unicornhathd
 
 
-print("""Unicorn HAT HD: Rainbow
+print("""Ubercorn rainbow 2x1
 
-OMG MY EYES.
+An example of how to use a 2-wide by 1-tall pair of Ubercorn matrices.
 
 Press Ctrl+C to exit!
 
 """)
 
-unicornhathd.rotation(0)
 unicornhathd.brightness(0.6)
 
+# Enable addressing for Ubercorn matrices
+unicornhathd.enable_addressing()
+
+# Set up buffer shape to be 32 wide and 16 tall
+unicornhathd.setup_buffer(32, 16)
+
+# Set up display 0 on left, and display 1 on right
+unicornhathd.setup_display(0, 0, 0, 0)
+unicornhathd.setup_display(1, 16, 0, 0)
+
 step = 0
+
 try:
     while True:
         step += 1
-        for x in range(0, 16):
+        for x in range(0, 32):
             for y in range(0, 16):
                 dx = 7
                 dy = 7

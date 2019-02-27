@@ -16,6 +16,7 @@ Press Ctrl+C to exit!
 """)
 
 unicornhathd.rotation(0)
+unicornhathd.brightness(0.6)
 u_width, u_height = unicornhathd.get_shape()
 
 # Generate a lookup table for 8bit hue to RGB conversion

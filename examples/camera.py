@@ -34,6 +34,7 @@ class DisplayOutput():
     def __init__(self):
         self.hat = unicornhathd
         self.hat.rotation(90)
+        self.hat.brightness(0.6)
 
     def write(self, buf):
         img = Image.frombytes('RGB', (64, 64), buf)
@@ -58,3 +59,4 @@ with PiCamera() as camera:
         pause()
     finally:
         camera.stop_recording()
+        unicornhathd.off()

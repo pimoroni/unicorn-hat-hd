@@ -44,8 +44,8 @@ FONT = ('/usr/share/fonts/truetype/freefont/FreeSansBold.ttf', 12)
 # sudo apt install fonts-roboto
 # FONT = ('/usr/share/fonts/truetype/roboto/Roboto-Bold.ttf', 10)
 
-unicornhathd.rotation(0)
-unicornhathd.brightness(1.0)
+unicornhathd.rotation(270)
+unicornhathd.brightness(0.6)
 
 
 width, height = unicornhathd.get_shape()
@@ -60,31 +60,36 @@ font = ImageFont.truetype(font_file, font_size)
 
 text_width, text_height = width, 0
 
-for line in lines:
-    w, h = font.getsize(line)
-    text_width += w + width
-    text_height = max(text_height, h)
+try:
+    for line in lines:
+        w, h = font.getsize(line)
+        text_width += w + width
+        text_height = max(text_height, h)
 
-text_width += width + text_x + 1
+    text_width += width + text_x + 1
 
-image = Image.new('RGB', (text_width, max(16, text_height)), (0, 0, 0))
-draw = ImageDraw.Draw(image)
+    image = Image.new('RGB', (text_width, max(16, text_height)), (0, 0, 0))
+    draw = ImageDraw.Draw(image)
 
-offset_left = 0
+    offset_left = 0
 
-for index, line in enumerate(lines):
-    draw.text((text_x + offset_left, text_y), line, colours[index], font=font)
+    for index, line in enumerate(lines):
+        draw.text((text_x + offset_left, text_y), line, colours[index], font=font)
 
-    offset_left += font.getsize(line)[0] + width
+        offset_left += font.getsize(line)[0] + width
 
-for scroll in range(text_width - width):
-    for x in range(width):
-        for y in range(height):
-            pixel = image.getpixel((x + scroll, y))
-            r, g, b = [int(n) for n in pixel]
-            unicornhathd.set_pixel(width - 1 - x, y, r, g, b)
+    for scroll in range(text_width - width):
+        for x in range(width):
+            for y in range(height):
+                pixel = image.getpixel((x + scroll, y))
+                r, g, b = [int(n) for n in pixel]
+                unicornhathd.set_pixel(width - 1 - x, y, r, g, b)
 
-    unicornhathd.show()
-    time.sleep(0.01)
+        unicornhathd.show()
+        time.sleep(0.01)
 
-unicornhathd.off()
+except KeyboardInterrupt:
+    unicornhathd.off()
+
+finally:
+    unicornhathd.off()

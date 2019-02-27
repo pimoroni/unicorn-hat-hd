@@ -15,7 +15,8 @@ Press Ctrl+C to exit!
 
 """)
 
-unicornhathd.rotation(0)
+unicornhathd.rotation(270)
+unicornhathd.brightness(0.6)
 width, height = unicornhathd.get_shape()
 # buffer to contain candle "heat" data
 candle = [0] * 256

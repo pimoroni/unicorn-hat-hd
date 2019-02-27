@@ -1,21 +1,25 @@
 #!/usr/bin/env python
 
 #
-# Ported from Pimoroni Unicorn Hat example https://github.com/pimoroni/unicorn-hat/blob/master/examples/hat/matrix.py
-# to unicornhat hd by aburgess@gmail.com (https://github.com/Mutiny-Games)
-#
+# Ported from Pimoroni Unicorn HAT example
+# https://github.com/pimoroni/unicorn-hat/blob/master/examples/hat/matrix.py
+# to Unicorn HAT HD by aburgess@gmail.com (https://github.com/Mutiny-Games)
 
 import time
 from random import randint
 
-import unicornhathd as unicorn
+import unicornhathd
 
-print("""Matrix
+print("""Unicorn HAT HD: Matrix HD
 
 Follow the white rabbit...
+
+Press Ctrl+C to exit!
+
 """)
 
-unicorn.rotation(270)
+unicornhathd.rotation(90)
+unicornhathd.brightness(0.6)
 
 wrd_rgb = [
     [154, 173, 154], [0, 255, 0], [0, 235, 0], [0, 220, 0],
@@ -34,10 +38,10 @@ try:
             y = person[1]
             for rgb in wrd_rgb:
                 if (y <= 15) and (y >= 0):
-                    unicorn.set_pixel(person[0], y, rgb[0], rgb[1], rgb[2])
+                    unicornhathd.set_pixel(person[0], y, rgb[0], rgb[1], rgb[2])
                 y += 1
             person[1] -= 1
-        unicorn.show()
+        unicornhathd.show()
         time.sleep(0.1)
         clock += 1
 
@@ -50,6 +54,4 @@ try:
             blue_pilled_population.pop(0)
 
 except KeyboardInterrupt:
-    pass
-unicorn.clear()
-unicorn.show()
+    unicornhathd.off()
