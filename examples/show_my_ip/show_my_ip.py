@@ -32,10 +32,11 @@ def create_image_from_text(in_text):
     image = Image.new("RGB", (text_width, text_height), (0,0,0))
     draw = ImageDraw.Draw(image)
     draw.text((text_x, text_y), my_ip, colours, font=font)
-    return image, text_width
+    return (image, text_width)
+
 
 # DISPLAY
-def scroll_txt((image,text_width)):
+def scroll_txt(image, text_width ):
     unicornhathd.rotation(0)
     for scroll in range(text_width - width):
         for x in range(width):
@@ -50,15 +51,13 @@ def scroll_txt((image,text_width)):
 
 # one stop call for scrolling text
 def scroll_text(in_txt):
-    scroll_txt(create_image_from_text(in_txt))
+    image, text_width = create_image_from_text(in_txt)
+    scroll_txt(image, text_width)
 
-width, height = unicornhathd.get_shape()  # 16,16 by default
-my_ip = get_ip()
-# my_image, text_width = create_image_from_text(my_ip)
-# scroll_txt(my_image,text_width)
-scroll_text(my_ip)
+if __name__ == "__main__":
 
 
+    width, height = unicornhathd.get_shape()  # 16,16 by default
+    my_ip = get_ip()
 
-
-
+    scroll_text(my_ip)
