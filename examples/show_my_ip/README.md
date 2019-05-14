@@ -1,6 +1,6 @@
 # Show My Ip 
 
-This is a useful service that will display your current IP address (from your Wifi connection, and not your Ethernet port) every 10 seconds. 
+This is a useful service that will display your current IP address (either from your Wifi connection, or your Ethernet port) every 10 seconds. 
 
 To install it run:
 
