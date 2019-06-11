@@ -147,7 +147,7 @@ def setup_display(address, x, y, rotation):
     enable_display(address)
 
 
-def brightness(b):
+def set_brightness(b):
     """Set the display brightness between 0.0 and 1.0.
 
     :param b: Brightness from 0.0 to 1.0 (default 0.5)
@@ -158,7 +158,7 @@ def brightness(b):
     _brightness = b
 
 
-def rotation(r):
+def set_rotation(r):
     """Set the display rotation in degrees.
 
     Actual rotation will be snapped to the nearest 90 degrees.
@@ -282,3 +282,7 @@ def show():
         _spi.xfer2([_SOF] + (numpy.rot90(_buf, _rotation).reshape(768) * _brightness).astype(numpy.uint8).tolist())
 
     time.sleep(_DELAY)
+
+
+rotation = set_rotation
+brightness = set_brightness
