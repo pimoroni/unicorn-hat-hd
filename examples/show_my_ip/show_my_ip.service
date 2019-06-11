@@ -1,0 +1,11 @@
+ [Unit]
+ Description=display IP on the unicorn HD hat
+
+ [Service]
+ Type=idle
+ ExecStart=/usr/bin/python3 /home/pi/Pimoroni/unicornhathd/examples/show_my_ip/show_my_ip.py
+ Restart=always
+ RestartSec=10
+
+ [Install]
+ WantedBy=multi-user.target
