@@ -229,5 +229,6 @@ def main(stdscr):
         unicornhathd.clear()
         unicornhathd.off()
 
+
 if __name__ == '__main__':
     curses.wrapper(main)
