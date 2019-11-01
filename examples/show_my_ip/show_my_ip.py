@@ -33,7 +33,7 @@ def create_image_from_text(in_text):
 
     image = Image.new('RGB', (text_width, text_height), (0, 0, 0))
     draw = ImageDraw.Draw(image)
-    draw.text((text_x, text_y), my_ip, colours, font=font)
+    draw.text((text_x, text_y), in_text, colours, font=font)
     return (image, text_width)
 
 
