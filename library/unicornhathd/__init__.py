@@ -43,6 +43,29 @@ _buffer_height = 16
 _addressing_enabled = False
 _buf = numpy.zeros((_buffer_width, _buffer_height, 3), dtype=int)
 
+COLORS = {
+    'red':(255,0,0),
+    'lime':(0,255,0),
+    'blue':(0,0,255),
+    'yellow':(255,255,0),
+    'magenta':(255,0,255),
+    'cyan':(0,255,255), 
+    'black':(0,0,0),
+    'white':(255,255,255),
+    'gray':(127,127,127),
+    'grey':(127,127,127),
+    'silver':(192,192,192),
+    'maroon':(128,0,0),
+    'olive':(128,128,0),
+    'green':(0,128,0),
+    'purple':(128,0,128),
+    'teal':(0,128,128),
+    'navy':(0,0,128),
+    'orange':(255,165,0),
+    'gold':(255,215,0),
+    'purple':(128,0,128),
+    'indigo':(75,0,130)
+}
 
 class Display:
     """Represents a single display in a multi-display chain.
@@ -190,7 +213,7 @@ def set_all(r, g, b):
     _buf[:] = r, g, b
 
 
-def set_pixel(x, y, r, g, b):
+def set_pixel(x, y, r, g=None, b=None):
     """Set a single pixel to RGB colour.
 
     :param x: Horizontal position from 0 to 15
@@ -200,6 +223,16 @@ def set_pixel(x, y, r, g, b):
     :param b: Amount of blue from 0 to 255
 
     """
+    if type(r) is tuple:
+        r, g, b = r
+
+    elif type(r) is str:
+        try:
+            r, g, b = COLORS[r.lower()]
+
+        except KeyError:
+            raise ValueError('Invalid color!')
+
     _buf[int(x)][int(y)] = r, g, b
 
 
