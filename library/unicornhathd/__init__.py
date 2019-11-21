@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 """Unicorn HAT HD library.
 
 Drive the 16x16 RGB pixel Pimoronu Unicorn HAT HD
