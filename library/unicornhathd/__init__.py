@@ -224,15 +224,15 @@ def set_pixel(x, y, r, g=None, b=None):
 
     """
     if type(r) is tuple:
-        r, g, b = r
-
+        r, g, b = r
+        
     elif type(r) is str:
         try:
             r, g, b = COLORS[r.lower()]
-
+            
         except KeyError:
             raise ValueError('Invalid color!')
-
+            
     _buf[int(x)][int(y)] = r, g, b
 
 
