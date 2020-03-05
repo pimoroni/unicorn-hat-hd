@@ -1,6 +1,7 @@
 """Test various import and setup routines."""
 import sys
 import mock
+import pytest
 
 
 def test_setup():
@@ -28,3 +29,35 @@ def test_rotation():
 
     unicornhathd.set_rotation(90)
     assert unicornhathd.set_rotation == unicornhathd.rotation
+
+
+def test_tuple_colour():
+    """Test valid text colour."""
+    sys.modules['spidev'] = mock.MagicMock()
+    import unicornhathd
+    unicornhathd.setup()
+
+    unicornhathd.set_pixel(0, 0, (255, 0, 0))
+
+    assert tuple(unicornhathd._buf[0, 0]) == (255, 0, 0)
+
+
+def test_valid_text_colour():
+    """Test valid text colour."""
+    sys.modules['spidev'] = mock.MagicMock()
+    import unicornhathd
+    unicornhathd.setup()
+
+    unicornhathd.set_pixel(0, 0, "Teal")
+
+    assert tuple(unicornhathd._buf[0, 0]) == unicornhathd.COLORS['teal']
+
+
+def test_invalid_text_colour():
+    """Test valid text colour."""
+    sys.modules['spidev'] = mock.MagicMock()
+    import unicornhathd
+    unicornhathd.setup()
+
+    with pytest.raises(ValueError):
+        unicornhathd.set_pixel(0, 0, "Octarine")
