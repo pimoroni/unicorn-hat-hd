@@ -48,7 +48,7 @@ def test_valid_text_colour():
     import unicornhathd
     unicornhathd.setup()
 
-    unicornhathd.set_pixel(0, 0, "Teal")
+    unicornhathd.set_pixel(0, 0, 'Teal')
 
     assert tuple(unicornhathd._buf[0, 0]) == unicornhathd.COLORS['teal']
 
@@ -60,4 +60,4 @@ def test_invalid_text_colour():
     unicornhathd.setup()
 
     with pytest.raises(ValueError):
-        unicornhathd.set_pixel(0, 0, "Octarine")
+        unicornhathd.set_pixel(0, 0, 'Octarine')
