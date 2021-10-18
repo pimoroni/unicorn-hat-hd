@@ -8,9 +8,7 @@
 #include <signal.h>
 #include "mtwrap.h"
 
-// need SPI driver
-// port forest to C or C++
-// need Unicorn Hat HD driver.
+// port of forest-fire.py to C/C++
 
 // recommended by kernel documentation
 #include <fcntl.h>
@@ -22,8 +20,6 @@
 const char *dev_file = "/dev/spidev0.0";
 const uint32_t max_speed_hz = 9000000;
 const uint8_t SOF = 0x72;
-// each frame is 16*16*3 bytes.
-// standard brightness setting is 0.5.  
 
 // forest is oversampled.
 const uint32_t scale = 3;
@@ -35,9 +31,6 @@ const uint32_t neighborhood = 3;
 #define GRID_LEN  (PANEL_LEN * SCALE_LEN)
 #define FOREST_LEN (PANEL_LEN*PANEL_LEN*SCALE_LEN*SCALE_LEN)
 #define IMAGE_LEN (PANEL_LEN * PANEL_LEN * 3)
-
-// notes on things
-// get_neighbors iterates over the bordering trees.
 
 typedef struct {
     uint8_t t[FOREST_LEN];
@@ -105,8 +98,7 @@ uint8_t count_neighbors(size_t x, size_t y) {
     return 24;
 }
 
-// from Adafruit
-// might be nice to have.
+// from Adafruit, gamma correction table for LEDs
 const uint8_t gamma8[] = {
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  1,  1,  1,
@@ -125,38 +117,20 @@ const uint8_t gamma8[] = {
   177,180,182,184,186,189,191,193,196,198,200,203,205,208,210,213,
   215,218,220,223,225,228,231,233,236,239,241,244,247,249,252,255 };
 
-void gamma_static(uint8_t image[IMAGE_LEN])
+uint8_t rescale(uint32_t accumulant, uint32_t neighbors)
 {
-	uint8_t random_static[PANEL_LEN*PANEL_LEN];
-        mt_write_random(random_static, sizeof(random_static));
-	for (int i = 0; i < (int) sizeof(random_static); ++i) {
-		uint8_t gamma_pixel = gamma8[gamma8[random_static[i]]];
-		image[3*i+0] = gamma_pixel;
-		image[3*i+1] = gamma_pixel;
-		image[3*i+2] = gamma_pixel;
-	}
-}
-
-uint8_t gamma(uint32_t accumulant, uint32_t neighbors)
-{
-	// brightness correction goes here.
-	//accumulant *= INT16_MAX*0.7;
   uint32_t frac = (255*accumulant + neighbors/2)/neighbors;
-	//frac = (frac + (1<<15)) >> 16;
   if (frac >= 255) return 255;
 	return frac;
 }
 
-//void 
 void average_forest(uint8_t image[IMAGE_LEN], forest_s *forest)
 {
-  //uint16_t bt_forest[PANEL_LEN * PANEL_LEN * 2 + 8 * PANEL_LEN + 8];
   for (int i = 0; i < PANEL_LEN; ++i) {
     for (int j = 0; j < PANEL_LEN; ++j) {
       size_t oidx = 3 * (i * PANEL_LEN + j);
       ssize_t x = i * SCALE_LEN + SCALE_LEN/2;
       ssize_t y = j * SCALE_LEN + SCALE_LEN/2;
-      //uint32_t r = 0, g = 0; //, b = 0;
       uint32_t ncnt = count_neighbors(x, y);
       uint32_t ncnt_check = 0;
       uint32_t burning = 0;
@@ -176,20 +150,9 @@ void average_forest(uint8_t image[IMAGE_LEN], forest_s *forest)
           else ++space;
         }
 
-      if (((space + trees + burning) != ncnt_check) ||
-          (ncnt_check != ncnt)) {
-        printf("Space error: %d %d %d %d %d %d\n",
-            xis, xie, yis, yie, ncnt_check, ncnt);
-      }
-      // r is # burning * 255
-      // g is # trees * 255
-      // b is zero.  kind of want to overlay rare sparkles.
-      
-      image[oidx + 0] = gamma(burning, ncnt);
-      image[oidx + 1] = gamma8[gamma(trees, ncnt)];
-      //image[oidx + 1] = gamma8[gamma(trees, ncnt)];
+      image[oidx + 0] = rescale(burning, ncnt);
+      image[oidx + 1] = gamma8[rescale(trees, ncnt)];
       image[oidx + 2] = 0;
-      //image[oidx + 2] = gamma(b, ncnt);
     }
   }
 }
@@ -223,8 +186,6 @@ void initialize_forest(forest_s *cf)
 
 void update_forest(forest_s *ff, forest_s *cf)
 {
-    // from current forest fill in future forest
-    // could skip this step.
     memset(ff, 0, sizeof(forest_s));
     for (int i = 0; i < FOREST_LEN; i++) {
         if (cf->t[i] == F_SPACE) {
@@ -236,7 +197,7 @@ void update_forest(forest_s *ff, forest_s *cf)
 						}
         } else if (cf->t[i] == F_FIRE) {
             ff->t[i] = F_SPACE;
-        } else { // F_TREE
+        } else { // cf->t[i] == F_TREE
             bool will_burn = mt_rand() < p_combust;
             will_burn |= burning_neighbors(cf, i);
             if (will_burn) {
@@ -246,36 +207,6 @@ void update_forest(forest_s *ff, forest_s *cf)
             }
         }
     }
-}
-
-void test_count_neighbors(void)
-{
-    const int testcnt = 5;
-    for (int x = 0; x < testcnt; ++x) {
-        for (int y = 0; y < testcnt; ++y) {
-            int n = count_neighbors(x, y);
-            printf("(%d, %d, %d),\n", x, y, n);
-        }
-    }
-}
-
-static void print_time_delta(void)
-{
-    static struct timespec prev;
-    struct timespec now = {0};
-    //int ret = clock_gettime(CLOCK_MONOTONIC_COARSE, &now);
-    int ret = clock_gettime(CLOCK_MONOTONIC, &now);
-    if (ret != 0) return;
-    double dprev = prev.tv_sec + 1e-9 * prev.tv_nsec;
-    double dnow = now.tv_sec + 1e-9 * now.tv_nsec;
-    if (prev.tv_sec != 0) {
-	double ddelta = dnow-dprev;
-	double dhz = 0.;
-	if (ddelta != 0.0) dhz = 1.0/ddelta;
-	if ((dhz < fps_target * .99) || (dhz > fps_target * 1.01)) // I dunno...
-        	printf("Hz: %f\tDelta: %f\n", dhz, ddelta);
-    }
-    prev = now;
 }
 
 static void increment_frametime(struct timespec *ts, int fps)
@@ -294,7 +225,6 @@ static void control_time_delta(void)
 {
 	static struct timespec prev;
 	struct timespec now = {0};
-	//int ret = clock_gettime(CLOCK_MONOTONIC_COARSE, &now);
 	int ret = clock_gettime(CLOCK_MONOTONIC, &now);
 	if (ret != 0) return;
 	if (prev.tv_sec == 0) {
@@ -315,11 +245,6 @@ static void control_time_delta(void)
 			printf("Timing anomaly: %ld, %ld, %ld, %ld, %ld.\n", ldelta, prev.tv_sec, prev.tv_nsec, now.tv_sec, now.tv_nsec);
 		}
 	}
-	// this will overflow eventually... Maybe in two weeks?
-	//double dprev = prev.tv_sec + 1e-9 * prev.tv_nsec;
-	//double dnow = now.tv_sec + 1e-9 * now.tv_nsec;
-	//double ddelta = dprev-dnow;
-	//if (ddelta < 0) return;
 	struct timespec vs = {lsecs, ldelta};
 	nanosleep(&vs, NULL);
 }
@@ -356,7 +281,6 @@ int spidev_init(void)
         return -1;
     }
         
-    // fd, mode, bits_per_word, max_speed
     return 0;
 }
 
@@ -375,8 +299,9 @@ void cleanup(int signal)
 int main(int argc, char **argv)
 {
     spidev_init();
-		//if (spi_fd) atexit(cleanup);
-		signal(SIGINT, cleanup);
+    // register cleanup handler to close SPI bus.
+    signal(SIGINT, cleanup);
+
     uint8_t image_pkt[IMAGE_LEN + 1] = {0};
     image_pkt[0] = SOF;
     forest_s a_forest = {0};
@@ -393,15 +318,10 @@ int main(int argc, char **argv)
         cur_forest = fut_forest;
         fut_forest = tmp_forest;;
         average_forest(image, cur_forest);
-        // demo code.
-	//gamma_static(image);
         show_image(image_pkt);
-        // put timing code here to limit at 60FPS or whatever.
-        print_time_delta();
         control_time_delta();
-        //struct timespec vs = {0, 10000000};
-        //nanosleep(&vs, NULL);
         ++frames;
+        // stop if we lose the SPI bus.
         if (!spi_fd && (frames >= 5)) running = false;
     }
     return 0;
