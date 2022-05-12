@@ -61,7 +61,6 @@ In all cases you will have to enable the SPI bus.
 
 ## Documentation & Support
 
-* Guides and tutorials - https://learn.pimoroni.com/unicorn-hat-hd
 * Function reference - http://docs.pimoroni.com/unicornhathd/
 * GPIO Pinout - http://pinout.xyz/pinout/unicorn_hat_hd
 * Get help - http://forums.pimoroni.com/c/support
