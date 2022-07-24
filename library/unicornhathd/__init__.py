@@ -9,6 +9,7 @@ over SPI from a Raspberry Pi or compatible platform.
 """
 
 import colorsys
+import re
 import time
 
 
@@ -230,14 +231,42 @@ def set_pixel(x, y, r, g=None, b=None):
         r, g, b = r
 
     elif type(r) is str:
-        try:
-            r, g, b = COLORS[r.lower()]
+        if r.startswith("#"):
+            r, g, b = hex_to_rgb(r)
+        else:
+            try:
+                r, g, b = COLORS[r.lower()]
 
-        except KeyError:
-            raise ValueError('Invalid color!')
+            except KeyError:
+                raise ValueError('Invalid color!')
 
     _buf[int(x)][int(y)] = r, g, b
 
+def hex_to_rgb(color):
+    """Convert hex color code to RGB.
+
+    :param color: 3 or 6 digit hex number prefixed with #
+    """
+    if not re.match(r"#([a-f0-9]{6}|[a-f0-9]{3})$", color, re.I):
+        raise ValueError("Invalid hex color.")
+
+    if len(color) == 7:
+        r, g, b = (
+            int(color[1:3], base=16),
+            int(color[3:5], base=16),
+            int(color[5:7], base=16),
+        )
+    elif len(color) == 4:
+        r, g, b = (
+            int(color[1] * 2, base=16),
+            int(color[2] * 2, base=16),
+            int(color[3] * 2, base=16),
+
+        )
+    else:
+        raise ValueError("Invalid hex color.")
+
+    return r, g, b
 
 def set_pixel_hsv(x, y, h, s=1.0, v=1.0):
     """Set a single pixel to a colour using HSV.
