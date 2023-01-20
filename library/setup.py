@@ -50,5 +50,5 @@ setup(
     classifiers=classifiers,
     py_modules=[],
     packages=['unicornhathd'],
-    install_requires=['spidev']
+    install_requires=['spidev', 'numpy']
 )
