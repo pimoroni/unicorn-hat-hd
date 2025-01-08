@@ -11,7 +11,7 @@ Jinja2==2.11.3
 MarkupSafe==1.1.0
 mock==2.0.0
 pbr==5.1.1
-Pygments==2.7.4
+Pygments==2.15.0
 pytz==2018.9
 requests==2.31.0
 six==1.12.0
