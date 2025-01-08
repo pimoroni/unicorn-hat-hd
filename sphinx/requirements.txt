@@ -13,7 +13,7 @@ mock==2.0.0
 pbr==5.1.1
 Pygments==2.15.0
 pytz==2018.9
-requests==2.31.0
+requests==2.32.2
 six==1.12.0
 snowballstemmer==1.2.1
 Sphinx==1.5.3
