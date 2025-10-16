@@ -58,7 +58,9 @@ font_file, font_size = FONT
 font = ImageFont.truetype(font_file, font_size)
 
 # Ask the loaded font how big our text will be
-text_width, text_height = font.getsize(TEXT)
+text_top, text_left, text_right, text_bottom = font.getbbox(TEXT)
+text_width = text_right - text_left
+text_height = text_bottom - text_top
 
 # Make sure we accommodate enough width to account for our text_x left offset
 text_width += width + text_x

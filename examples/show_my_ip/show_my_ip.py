@@ -23,7 +23,9 @@ def create_image_from_text(in_text):
     font_file = '/usr/share/fonts/truetype/freefont/FreeSansBold.ttf'
     font_size = 12
     font = ImageFont.truetype(font_file, font_size)
-    w, h = font.getsize(in_text)
+    top, left, right, bottom = font.getbbox(in_text)
+    w = right - left
+    h = bottom - top
 
     text_x, text_y = width, 0
     text_width, text_height = width, 0
