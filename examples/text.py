@@ -62,7 +62,9 @@ text_width, text_height = width, 0
 
 try:
     for line in lines:
-        w, h = font.getsize(line)
+        top, left, right, bottom = font.getbbox(line)
+        w = right - left
+        h = bottom - top
         text_width += w + width
         text_height = max(text_height, h)
 
@@ -76,7 +78,7 @@ try:
     for index, line in enumerate(lines):
         draw.text((text_x + offset_left, text_y), line, colours[index], font=font)
 
-        offset_left += font.getsize(line)[0] + width
+        offset_left += font.getlength(line) + width
 
     for scroll in range(text_width - width):
         for x in range(width):
